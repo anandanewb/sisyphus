@@ -7,6 +7,8 @@
 def quick_sort(arr):
     if (len(arr) < 2):
         return arr
+    else if (len(arr) == 2)
+        
     else:
         pivot = arr[0]
         rest_of_arr = arr[1:]
