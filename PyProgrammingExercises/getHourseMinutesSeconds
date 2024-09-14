@@ -1,0 +1,16 @@
+def getHoursMinutesSeconds(totalSeconds):
+    hours = totalSeconds // 3600
+    minutes = (totalSeconds % 3600) // 60
+    seconds = totalSeconds % 60
+    print(f"{hours} hours, {minutes} minutes and {seconds} seconds")
+
+'''
+ 5 test cases for getHoursMinutesSeconds with full coverage
+'''
+getHoursMinutesSeconds(3661) # 1 hour, 1 minute and 1 second    
+getHoursMinutesSeconds(7200) # 2 hours  
+getHoursMinutesSeconds(18000) # 5 hours
+getHoursMinutesSeconds(0) # 0 hours, 0 minutes and 0 seconds
+
+
+
