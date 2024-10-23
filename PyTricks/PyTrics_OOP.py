@@ -45,3 +45,83 @@ randoms = [random.randint(0, 10) for _ in range(10)]
 for i, value in enumerate(randoms):
     print(i, value)
 
+# 4.7 Class vs Interface Variable Pitfalls
+class Dog:
+    num_legs = 4
+
+    def __init__(self, name):
+        self.name = name    
+        pass
+
+jack = Dog('Jack')
+jill = Dog('Jill')
+print(jack.name, jill.name)
+
+class CountedObject:
+    num_instances = 0
+
+    def __init__(self):
+        self.__class__.num_instances += 1
+
+print(CountedObject.num_instances)
+
+for _ in range(0,3):
+    print(CountedObject().num_instances)
+
+
+# 4.8 Instance, Class and Static Methods Demystifiedj
+class MyClass:
+    def method(self):
+        return 'instance method called', self
+    
+    @classmethod
+    def classmethod(cls):
+        return 'class method called', cls
+    
+    @staticmethod
+    def staticmethod():
+        return 'static method called'
+    
+
+obj = MyClass()
+
+obj.method()
+
+MyClass.method(obj)
+
+import math
+class Pizza:
+    def __init__(self, ingredients):
+        self.ingredients = ingredients
+    
+    def __repr__(self):
+        return f'Pizza({self.ingredients!r})'
+    
+    @classmethod
+    def margherita(cls):
+        return cls(['mozzarella', 'tomatoes'])
+    
+    @classmethod
+    def prosciutto(cls):
+        return cls(['mozzarella', 'tomatoes', 'ham'])
+    
+
+Pizza(['cheese', 'tomatoes'])
+
+Pizza.margherita()
+
+Pizza.prosciutto()
+
+import math
+
+class Pizza2:
+    def __init__(self, radius, ingredients):
+        self.radius = radius
+        self.ingredients = ingredients
+
+    def area(self):
+        return self.circle_area(self.radius)
+    
+    @staticmethod
+    def circle_area(r):
+        return r ** 2 * math.pi
