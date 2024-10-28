@@ -81,13 +81,19 @@ class MyClass:
     @staticmethod
     def staticmethod():
         return 'static method called'
-    
 
+    
 obj = MyClass()
 
 obj.method()
-
 MyClass.method(obj)
+
+MyClass.classmethod()
+
+MyClass.staticmethod()
+obj.staticmethod()
+
+
 
 import math
 class Pizza:
