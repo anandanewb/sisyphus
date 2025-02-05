@@ -1,0 +1,40 @@
+import pandas as pd
+
+data_folder = 'data/'
+file_names = ['san+francisco,ca', 
+             'new+york,ny',
+             'springfield,ma',
+             'boston,ma',
+             'springfield,il',
+             'albany,ny',
+             'los+angeles,ca',
+             'chicago,il']
+extension = '.csv'
+col_names = ['date_time',
+             'max_temp',
+             'min_temp']
+
+# add file name as a value for every row 
+dfs = []
+for i, file_name in enumerate(file_names):
+    df = pd.read_csv(data_folder+file_name+extension, usecols=[0, 1, 2], names=col_names, skiprows=1, header=None, parse_dates=[0])
+    city, state = file_name.split(',')
+    df['city'] = city
+    df['state'] = state
+    dfs.append(df)
+
+df_all= pd.concat(dfs, ignore_index=True)
+
+df_all.groupby(['state', 'city'])['date_time'].agg(['min', 'max'])    
+df_all.groupby(['state', 'city'])[['min_temp', 'max_temp']].agg(['min', 'max'])    
+df_all.groupby(['state'])[['min_temp', 'max_temp']].agg(['min', 'max'])
+    
+#window functions
+
+df = pd.DataFrame({'sales': [100, 150, 200, 250,
+                             200, 150, 300, 400,
+                             500, 100, 300, 200],
+                   'quarters':'Q1 Q2 Q3 Q4'.split() * 3})
+df['sales'].pct_change()
+df['sales'].diff()
+

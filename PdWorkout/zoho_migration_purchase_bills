@@ -1,0 +1,712 @@
+{
+ "cells": [
+  {
+   "cell_type": "markdown",
+   "metadata": {},
+   "source": [
+    "Connected to .venv (Python 3.12.6)"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": null,
+   "id": "a72e1d99-80f7-4576-ab32-2402b391bdc4",
+   "metadata": {},
+   "outputs": [
+    {
+     "name": "stderr",
+     "output_type": "stream",
+     "text": [
+      "<ipython-input-1-e0a489fa5e51>:5: DtypeWarning: Columns (48,50) have mixed types. Specify dtype option on import or set low_memory=False.\n",
+      "  df = pd.read_csv('~/Downloads/Bill_Purchases_All.csv', parse_dates=parse_dates)\n"
+     ]
+    },
+    {
+     "ename": "UFuncTypeError",
+     "evalue": "ufunc 'add' did not contain a loop with signature matching types (dtype('<U15'), dtype('float64')) -> None",
+     "output_type": "error",
+     "traceback": [
+      "\u001b[0;31m---------------------------------------------------------------------------\u001b[0m",
+      "\u001b[0;31mUFuncTypeError\u001b[0m                            Traceback (most recent call last)",
+      "File \u001b[1;32mUntitled-1:7\u001b[0m\n\u001b[1;32m      5\u001b[0m df \u001b[39m=\u001b[39m pd\u001b[39m.\u001b[39mread_csv(\u001b[39m'\u001b[39m\u001b[39m~/Downloads/Bill_Purchases_All.csv\u001b[39m\u001b[39m'\u001b[39m, parse_dates\u001b[39m=\u001b[39mparse_dates)\n\u001b[1;32m      6\u001b[0m df[\u001b[39m'\u001b[39m\u001b[39mfiscal_year\u001b[39m\u001b[39m'\u001b[39m] \u001b[39m=\u001b[39m np\u001b[39m.\u001b[39mwhere(df[\u001b[39m'\u001b[39m\u001b[39mBill Date\u001b[39m\u001b[39m'\u001b[39m]\u001b[39m.\u001b[39mdt\u001b[39m.\u001b[39mmonth \u001b[39m>\u001b[39m\u001b[39m=\u001b[39m \u001b[39m4\u001b[39m, df[\u001b[39m'\u001b[39m\u001b[39mBill Date\u001b[39m\u001b[39m'\u001b[39m]\u001b[39m.\u001b[39mdt\u001b[39m.\u001b[39myear,  df[\u001b[39m'\u001b[39m\u001b[39mBill Date\u001b[39m\u001b[39m'\u001b[39m]\u001b[39m.\u001b[39mdt\u001b[39m.\u001b[39myear\u001b[39m-\u001b[39m\u001b[39m1\u001b[39m)\n\u001b[0;32m----> 7\u001b[0m df[\u001b[39m'\u001b[39m\u001b[39maccount_clean\u001b[39m\u001b[39m'\u001b[39m] \u001b[39m=\u001b[39m np\u001b[39m.\u001b[39mwhere(df[\u001b[39m'\u001b[39m\u001b[39mTax Percentage\u001b[39m\u001b[39m'\u001b[39m] \u001b[39m>\u001b[39m \u001b[39m0\u001b[39m, \u001b[39m'\u001b[39;49m\u001b[39mGST Purchase @ \u001b[39;49m\u001b[39m'\u001b[39;49m\u001b[39m+\u001b[39;49m df[\u001b[39m\"\u001b[39;49m\u001b[39mTax Percentage\u001b[39;49m\u001b[39m\"\u001b[39;49m]\u001b[39m.\u001b[39;49mround(\u001b[39m0\u001b[39;49m) \u001b[39m+\u001b[39m\u001b[39m'\u001b[39m\u001b[39m%\u001b[39m\u001b[39m'\u001b[39m, df[\u001b[39m'\u001b[39m\u001b[39mAccount\u001b[39m\u001b[39m'\u001b[39m])\n",
+      "File \u001b[0;32m~/coding/sisyphus/PdWorkout/.venv/lib/python3.12/site-packages/pandas/core/ops/common.py:76\u001b[0m, in \u001b[0;36m_unpack_zerodim_and_defer.<locals>.new_method\u001b[0;34m(self, other)\u001b[0m\n\u001b[1;32m     72\u001b[0m             \u001b[39mreturn\u001b[39;00m \u001b[39mNotImplemented\u001b[39m\n\u001b[1;32m     74\u001b[0m other \u001b[39m=\u001b[39m item_from_zerodim(other)\n\u001b[0;32m---> 76\u001b[0m \u001b[39mreturn\u001b[39;00m method(\u001b[39mself\u001b[39;49m, other)\n",
+      "File \u001b[0;32m~/coding/sisyphus/PdWorkout/.venv/lib/python3.12/site-packages/pandas/core/arraylike.py:190\u001b[0m, in \u001b[0;36mOpsMixin.__radd__\u001b[0;34m(self, other)\u001b[0m\n\u001b[1;32m    188\u001b[0m \u001b[39m@unpack_zerodim_and_defer\u001b[39m(\u001b[39m\"\u001b[39m\u001b[39m__radd__\u001b[39m\u001b[39m\"\u001b[39m)\n\u001b[1;32m    189\u001b[0m \u001b[39mdef\u001b[39;00m \u001b[39m__radd__\u001b[39m(\u001b[39mself\u001b[39m, other):\n\u001b[0;32m--> 190\u001b[0m     \u001b[39mreturn\u001b[39;00m \u001b[39mself\u001b[39;49m\u001b[39m.\u001b[39;49m_arith_method(other, roperator\u001b[39m.\u001b[39;49mradd)\n",
+      "File \u001b[0;32m~/coding/sisyphus/PdWorkout/.venv/lib/python3.12/site-packages/pandas/core/series.py:6135\u001b[0m, in \u001b[0;36mSeries._arith_method\u001b[0;34m(self, other, op)\u001b[0m\n\u001b[1;32m   6133\u001b[0m \u001b[39mdef\u001b[39;00m \u001b[39m_arith_method\u001b[39m(\u001b[39mself\u001b[39m, other, op):\n\u001b[1;32m   6134\u001b[0m     \u001b[39mself\u001b[39m, other \u001b[39m=\u001b[39m \u001b[39mself\u001b[39m\u001b[39m.\u001b[39m_align_for_op(other)\n\u001b[0;32m-> 6135\u001b[0m     \u001b[39mreturn\u001b[39;00m base\u001b[39m.\u001b[39;49mIndexOpsMixin\u001b[39m.\u001b[39;49m_arith_method(\u001b[39mself\u001b[39;49m, other, op)\n",
+      "File \u001b[0;32m~/coding/sisyphus/PdWorkout/.venv/lib/python3.12/site-packages/pandas/core/base.py:1382\u001b[0m, in \u001b[0;36mIndexOpsMixin._arith_method\u001b[0;34m(self, other, op)\u001b[0m\n\u001b[1;32m   1379\u001b[0m     rvalues \u001b[39m=\u001b[39m np\u001b[39m.\u001b[39marange(rvalues\u001b[39m.\u001b[39mstart, rvalues\u001b[39m.\u001b[39mstop, rvalues\u001b[39m.\u001b[39mstep)\n\u001b[1;32m   1381\u001b[0m \u001b[39mwith\u001b[39;00m np\u001b[39m.\u001b[39merrstate(\u001b[39mall\u001b[39m\u001b[39m=\u001b[39m\u001b[39m\"\u001b[39m\u001b[39mignore\u001b[39m\u001b[39m\"\u001b[39m):\n\u001b[0;32m-> 1382\u001b[0m     result \u001b[39m=\u001b[39m ops\u001b[39m.\u001b[39;49marithmetic_op(lvalues, rvalues, op)\n\u001b[1;32m   1384\u001b[0m \u001b[39mreturn\u001b[39;00m \u001b[39mself\u001b[39m\u001b[39m.\u001b[39m_construct_result(result, name\u001b[39m=\u001b[39mres_name)\n",
+      "File \u001b[0;32m~/coding/sisyphus/PdWorkout/.venv/lib/python3.12/site-packages/pandas/core/ops/array_ops.py:283\u001b[0m, in \u001b[0;36marithmetic_op\u001b[0;34m(left, right, op)\u001b[0m\n\u001b[1;32m    279\u001b[0m     _bool_arith_check(op, left, right)  \u001b[39m# type: ignore[arg-type]\u001b[39;00m\n\u001b[1;32m    281\u001b[0m     \u001b[39m# error: Argument 1 to \"_na_arithmetic_op\" has incompatible type\u001b[39;00m\n\u001b[1;32m    282\u001b[0m     \u001b[39m# \"Union[ExtensionArray, ndarray[Any, Any]]\"; expected \"ndarray[Any, Any]\"\u001b[39;00m\n\u001b[0;32m--> 283\u001b[0m     res_values \u001b[39m=\u001b[39m _na_arithmetic_op(left, right, op)  \u001b[39m# type: ignore[arg-type]\u001b[39;00m\n\u001b[1;32m    285\u001b[0m \u001b[39mreturn\u001b[39;00m res_values\n",
+      "File \u001b[0;32m~/coding/sisyphus/PdWorkout/.venv/lib/python3.12/site-packages/pandas/core/ops/array_ops.py:218\u001b[0m, in \u001b[0;36m_na_arithmetic_op\u001b[0;34m(left, right, op, is_cmp)\u001b[0m\n\u001b[1;32m    215\u001b[0m     func \u001b[39m=\u001b[39m partial(expressions\u001b[39m.\u001b[39mevaluate, op)\n\u001b[1;32m    217\u001b[0m \u001b[39mtry\u001b[39;00m:\n\u001b[0;32m--> 218\u001b[0m     result \u001b[39m=\u001b[39m func(left, right)\n\u001b[1;32m    219\u001b[0m \u001b[39mexcept\u001b[39;00m \u001b[39mTypeError\u001b[39;00m:\n\u001b[1;32m    220\u001b[0m     \u001b[39mif\u001b[39;00m \u001b[39mnot\u001b[39;00m is_cmp \u001b[39mand\u001b[39;00m (\n\u001b[1;32m    221\u001b[0m         left\u001b[39m.\u001b[39mdtype \u001b[39m==\u001b[39m \u001b[39mobject\u001b[39m \u001b[39mor\u001b[39;00m \u001b[39mgetattr\u001b[39m(right, \u001b[39m\"\u001b[39m\u001b[39mdtype\u001b[39m\u001b[39m\"\u001b[39m, \u001b[39mNone\u001b[39;00m) \u001b[39m==\u001b[39m \u001b[39mobject\u001b[39m\n\u001b[1;32m    222\u001b[0m     ):\n\u001b[0;32m   (...)\u001b[0m\n\u001b[1;32m    225\u001b[0m         \u001b[39m# Don't do this for comparisons, as that will handle complex numbers\u001b[39;00m\n\u001b[1;32m    226\u001b[0m         \u001b[39m#  incorrectly, see GH#32047\u001b[39;00m\n",
+      "File \u001b[0;32m~/coding/sisyphus/PdWorkout/.venv/lib/python3.12/site-packages/pandas/core/roperator.py:11\u001b[0m, in \u001b[0;36mradd\u001b[0;34m(left, right)\u001b[0m\n\u001b[1;32m     10\u001b[0m \u001b[39mdef\u001b[39;00m \u001b[39mradd\u001b[39m(left, right):\n\u001b[0;32m---> 11\u001b[0m     \u001b[39mreturn\u001b[39;00m right \u001b[39m+\u001b[39;49m left\n",
+      "\u001b[0;31mUFuncTypeError\u001b[0m: ufunc 'add' did not contain a loop with signature matching types (dtype('<U15'), dtype('float64')) -> None"
+     ]
+    }
+   ],
+   "source": [
+    "import numpy as np\n",
+    "import pandas as pd\n",
+    "\n",
+    "parse_dates = ['Bill Date']\n",
+    "df = pd.read_csv('~/Downloads/Bill_Purchases_All.csv', parse_dates=parse_dates)\n",
+    "df['fiscal_year'] = np.where(df['Bill Date'].dt.month >= 4, df['Bill Date'].dt.year,  df['Bill Date'].dt.year-1)\n",
+    "df['account_clean'] = np.where(df['Tax Percentage'] > 0, 'GST Purchase @ '+ df[\"Tax Percentage\"].round(0) +'%', df['Account'])"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": null,
+   "id": "e68fd29f-4be7-46f6-88de-20661c847db8",
+   "metadata": {},
+   "outputs": [
+    {
+     "name": "stderr",
+     "output_type": "stream",
+     "text": [
+      "<ipython-input-2-cf54ef0d8d34>:5: DtypeWarning: Columns (48,50) have mixed types. Specify dtype option on import or set low_memory=False.\n",
+      "  df = pd.read_csv('~/Downloads/Bill_Purchases_All.csv', parse_dates=parse_dates)\n"
+     ]
+    }
+   ],
+   "source": [
+    "import numpy as np\n",
+    "import pandas as pd\n",
+    "\n",
+    "parse_dates = ['Bill Date']\n",
+    "df = pd.read_csv('~/Downloads/Bill_Purchases_All.csv', parse_dates=parse_dates)\n",
+    "df['fiscal_year'] = np.where(df['Bill Date'].dt.month >= 4, df['Bill Date'].dt.year,  df['Bill Date'].dt.year-1)\n",
+    "df['account_clean'] = np.where(df['Tax Percentage'] > 0, 'GST Purchase @ '+ df[\"Tax Percentage\"].round(0).astype(str) +'%', df['Account'])"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": null,
+   "metadata": {},
+   "outputs": [],
+   "source": [
+    "df.to_csv('~/Downloads/account_cleaned.csv')"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": null,
+   "id": "33e38dc6-5b8e-4e4f-89f5-20dec7a03ce1",
+   "metadata": {},
+   "outputs": [
+    {
+     "name": "stderr",
+     "output_type": "stream",
+     "text": [
+      "<ipython-input-4-ab916c249436>:5: DtypeWarning: Columns (48,50) have mixed types. Specify dtype option on import or set low_memory=False.\n",
+      "  df = pd.read_csv('~/Downloads/Bill_Purchases_All.csv', parse_dates=parse_dates)\n"
+     ]
+    },
+    {
+     "ename": "TypeError",
+     "evalue": "unsupported operand type(s) for &: 'bool' and 'str'",
+     "output_type": "error",
+     "traceback": [
+      "\u001b[0;31m---------------------------------------------------------------------------\u001b[0m",
+      "\u001b[0;31mTypeError\u001b[0m                                 Traceback (most recent call last)",
+      "File \u001b[0;32m~/coding/sisyphus/PdWorkout/.venv/lib/python3.12/site-packages/pandas/core/ops/array_ops.py:362\u001b[0m, in \u001b[0;36mna_logical_op\u001b[0;34m(x, y, op)\u001b[0m\n\u001b[1;32m    353\u001b[0m \u001b[39mtry\u001b[39;00m:\n\u001b[1;32m    354\u001b[0m     \u001b[39m# For exposition, write:\u001b[39;00m\n\u001b[1;32m    355\u001b[0m     \u001b[39m#  yarr = isinstance(y, np.ndarray)\u001b[39;00m\n\u001b[0;32m   (...)\u001b[0m\n\u001b[1;32m    360\u001b[0m     \u001b[39m# Then Cases where this goes through without raising include:\u001b[39;00m\n\u001b[1;32m    361\u001b[0m     \u001b[39m#  (xint or xbool) and (yint or bool)\u001b[39;00m\n\u001b[0;32m--> 362\u001b[0m     result \u001b[39m=\u001b[39m op(x, y)\n\u001b[1;32m    363\u001b[0m \u001b[39mexcept\u001b[39;00m \u001b[39mTypeError\u001b[39;00m:\n",
+      "\u001b[0;31mTypeError\u001b[0m: unsupported operand type(s) for &: 'bool' and 'str'",
+      "\nDuring handling of the above exception, another exception occurred:\n",
+      "\u001b[0;31mTypeError\u001b[0m                                 Traceback (most recent call last)",
+      "File \u001b[1;32mUntitled-1:8\u001b[0m\n\u001b[1;32m      6\u001b[0m df[\u001b[39m'\u001b[39m\u001b[39mfiscal_year\u001b[39m\u001b[39m'\u001b[39m] \u001b[39m=\u001b[39m np\u001b[39m.\u001b[39mwhere(df[\u001b[39m'\u001b[39m\u001b[39mBill Date\u001b[39m\u001b[39m'\u001b[39m]\u001b[39m.\u001b[39mdt\u001b[39m.\u001b[39mmonth \u001b[39m>\u001b[39m\u001b[39m=\u001b[39m \u001b[39m4\u001b[39m, df[\u001b[39m'\u001b[39m\u001b[39mBill Date\u001b[39m\u001b[39m'\u001b[39m]\u001b[39m.\u001b[39mdt\u001b[39m.\u001b[39myear,  df[\u001b[39m'\u001b[39m\u001b[39mBill Date\u001b[39m\u001b[39m'\u001b[39m]\u001b[39m.\u001b[39mdt\u001b[39m.\u001b[39myear\u001b[39m-\u001b[39m\u001b[39m1\u001b[39m)\n\u001b[1;32m      7\u001b[0m df[\u001b[39m'\u001b[39m\u001b[39maccount_clean\u001b[39m\u001b[39m'\u001b[39m] \u001b[39m=\u001b[39m np\u001b[39m.\u001b[39mwhere(df[\u001b[39m'\u001b[39m\u001b[39mTax Percentage\u001b[39m\u001b[39m'\u001b[39m] \u001b[39m>\u001b[39m \u001b[39m0\u001b[39m, \u001b[39m'\u001b[39m\u001b[39mGST Purchase @ \u001b[39m\u001b[39m'\u001b[39m\u001b[39m+\u001b[39m df[\u001b[39m\"\u001b[39m\u001b[39mTax Percentage\u001b[39m\u001b[39m\"\u001b[39m]\u001b[39m.\u001b[39mround(\u001b[39m0\u001b[39m)\u001b[39m.\u001b[39mastype(\u001b[39mstr\u001b[39m) \u001b[39m+\u001b[39m\u001b[39m'\u001b[39m\u001b[39m%\u001b[39m\u001b[39m'\u001b[39m, df[\u001b[39m'\u001b[39m\u001b[39mAccount\u001b[39m\u001b[39m'\u001b[39m])\n\u001b[0;32m----> 8\u001b[0m df[\u001b[39m'\u001b[39m\u001b[39mitem_account_type_clean\u001b[39m\u001b[39m'\u001b[39m] \u001b[39m=\u001b[39m np\u001b[39m.\u001b[39mwhere(df[\u001b[39m'\u001b[39;49m\u001b[39mTax Name\u001b[39;49m\u001b[39m'\u001b[39;49m]\u001b[39m.\u001b[39;49mstr\u001b[39m.\u001b[39;49mstartswith(\u001b[39m\"\u001b[39;49m\u001b[39mGST\u001b[39;49m\u001b[39m\"\u001b[39;49m) \u001b[39m&\u001b[39;49m df[\u001b[39m'\u001b[39;49m\u001b[39mItem Account Type\u001b[39;49m\u001b[39m'\u001b[39;49m]\u001b[39m.\u001b[39;49mstr\u001b[39m.\u001b[39;49mstrip() \u001b[39m==\u001b[39m \u001b[39m'\u001b[39m\u001b[39m'\u001b[39m,\n\u001b[1;32m      9\u001b[0m                                          \u001b[39m'\u001b[39m\u001b[39mExpense\u001b[39m\u001b[39m'\u001b[39m, df[\u001b[39m'\u001b[39m\u001b[39mItem Account Type\u001b[39m\u001b[39m'\u001b[39m])\n",
+      "File \u001b[0;32m~/coding/sisyphus/PdWorkout/.venv/lib/python3.12/site-packages/pandas/core/ops/common.py:76\u001b[0m, in \u001b[0;36m_unpack_zerodim_and_defer.<locals>.new_method\u001b[0;34m(self, other)\u001b[0m\n\u001b[1;32m     72\u001b[0m             \u001b[39mreturn\u001b[39;00m \u001b[39mNotImplemented\u001b[39m\n\u001b[1;32m     74\u001b[0m other \u001b[39m=\u001b[39m item_from_zerodim(other)\n\u001b[0;32m---> 76\u001b[0m \u001b[39mreturn\u001b[39;00m method(\u001b[39mself\u001b[39;49m, other)\n",
+      "File \u001b[0;32m~/coding/sisyphus/PdWorkout/.venv/lib/python3.12/site-packages/pandas/core/arraylike.py:70\u001b[0m, in \u001b[0;36mOpsMixin.__and__\u001b[0;34m(self, other)\u001b[0m\n\u001b[1;32m     68\u001b[0m \u001b[39m@unpack_zerodim_and_defer\u001b[39m(\u001b[39m\"\u001b[39m\u001b[39m__and__\u001b[39m\u001b[39m\"\u001b[39m)\n\u001b[1;32m     69\u001b[0m \u001b[39mdef\u001b[39;00m \u001b[39m__and__\u001b[39m(\u001b[39mself\u001b[39m, other):\n\u001b[0;32m---> 70\u001b[0m     \u001b[39mreturn\u001b[39;00m \u001b[39mself\u001b[39;49m\u001b[39m.\u001b[39;49m_logical_method(other, operator\u001b[39m.\u001b[39;49mand_)\n",
+      "File \u001b[0;32m~/coding/sisyphus/PdWorkout/.venv/lib/python3.12/site-packages/pandas/core/series.py:6130\u001b[0m, in \u001b[0;36mSeries._logical_method\u001b[0;34m(self, other, op)\u001b[0m\n\u001b[1;32m   6127\u001b[0m lvalues \u001b[39m=\u001b[39m \u001b[39mself\u001b[39m\u001b[39m.\u001b[39m_values\n\u001b[1;32m   6128\u001b[0m rvalues \u001b[39m=\u001b[39m extract_array(other, extract_numpy\u001b[39m=\u001b[39m\u001b[39mTrue\u001b[39;00m, extract_range\u001b[39m=\u001b[39m\u001b[39mTrue\u001b[39;00m)\n\u001b[0;32m-> 6130\u001b[0m res_values \u001b[39m=\u001b[39m ops\u001b[39m.\u001b[39;49mlogical_op(lvalues, rvalues, op)\n\u001b[1;32m   6131\u001b[0m \u001b[39mreturn\u001b[39;00m \u001b[39mself\u001b[39m\u001b[39m.\u001b[39m_construct_result(res_values, name\u001b[39m=\u001b[39mres_name)\n",
+      "File \u001b[0;32m~/coding/sisyphus/PdWorkout/.venv/lib/python3.12/site-packages/pandas/core/ops/array_ops.py:454\u001b[0m, in \u001b[0;36mlogical_op\u001b[0;34m(left, right, op)\u001b[0m\n\u001b[1;32m    450\u001b[0m \u001b[39melse\u001b[39;00m:\n\u001b[1;32m    451\u001b[0m     \u001b[39m# i.e. scalar\u001b[39;00m\n\u001b[1;32m    452\u001b[0m     is_other_int_dtype \u001b[39m=\u001b[39m lib\u001b[39m.\u001b[39mis_integer(rvalues)\n\u001b[0;32m--> 454\u001b[0m res_values \u001b[39m=\u001b[39m na_logical_op(lvalues, rvalues, op)\n\u001b[1;32m    456\u001b[0m \u001b[39m# For int vs int `^`, `|`, `&` are bitwise operators and return\u001b[39;00m\n\u001b[1;32m    457\u001b[0m \u001b[39m#   integer dtypes.  Otherwise these are boolean ops\u001b[39;00m\n\u001b[1;32m    458\u001b[0m \u001b[39mif\u001b[39;00m \u001b[39mnot\u001b[39;00m (left\u001b[39m.\u001b[39mdtype\u001b[39m.\u001b[39mkind \u001b[39min\u001b[39;00m \u001b[39m\"\u001b[39m\u001b[39miu\u001b[39m\u001b[39m\"\u001b[39m \u001b[39mand\u001b[39;00m is_other_int_dtype):\n",
+      "File \u001b[0;32m~/coding/sisyphus/PdWorkout/.venv/lib/python3.12/site-packages/pandas/core/ops/array_ops.py:369\u001b[0m, in \u001b[0;36mna_logical_op\u001b[0;34m(x, y, op)\u001b[0m\n\u001b[1;32m    367\u001b[0m     x \u001b[39m=\u001b[39m ensure_object(x)\n\u001b[1;32m    368\u001b[0m     y \u001b[39m=\u001b[39m ensure_object(y)\n\u001b[0;32m--> 369\u001b[0m     result \u001b[39m=\u001b[39m libops\u001b[39m.\u001b[39;49mvec_binop(x\u001b[39m.\u001b[39;49mravel(), y\u001b[39m.\u001b[39;49mravel(), op)\n\u001b[1;32m    370\u001b[0m \u001b[39melse\u001b[39;00m:\n\u001b[1;32m    371\u001b[0m     \u001b[39m# let null fall thru\u001b[39;00m\n\u001b[1;32m    372\u001b[0m     \u001b[39massert\u001b[39;00m lib\u001b[39m.\u001b[39mis_scalar(y)\n",
+      "File \u001b[0;32mops.pyx:252\u001b[0m, in \u001b[0;36mpandas._libs.ops.vec_binop\u001b[0;34m()\u001b[0m\n",
+      "File \u001b[0;32mops.pyx:245\u001b[0m, in \u001b[0;36mpandas._libs.ops.vec_binop\u001b[0;34m()\u001b[0m\n",
+      "\u001b[0;31mTypeError\u001b[0m: unsupported operand type(s) for &: 'bool' and 'str'"
+     ]
+    }
+   ],
+   "source": [
+    "import numpy as np\n",
+    "import pandas as pd\n",
+    "\n",
+    "parse_dates = ['Bill Date']\n",
+    "df = pd.read_csv('~/Downloads/Bill_Purchases_All.csv', parse_dates=parse_dates)\n",
+    "df['fiscal_year'] = np.where(df['Bill Date'].dt.month >= 4, df['Bill Date'].dt.year,  df['Bill Date'].dt.year-1)\n",
+    "df['account_clean'] = np.where(df['Tax Percentage'] > 0, 'GST Purchase @ '+ df[\"Tax Percentage\"].round(0).astype(str) +'%', df['Account'])\n",
+    "df['item_account_type_clean'] = np.where(df['Tax Name'].str.startswith(\"GST\") & df['Item Account Type'].str.strip() == '',\n",
+    "                                         'Expense', df['Item Account Type'])"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": null,
+   "id": "5abc08ed-0c38-4621-95df-aaaf9acbd374",
+   "metadata": {},
+   "outputs": [
+    {
+     "name": "stderr",
+     "output_type": "stream",
+     "text": [
+      "<ipython-input-5-6e448730305a>:5: DtypeWarning: Columns (48,50) have mixed types. Specify dtype option on import or set low_memory=False.\n",
+      "  df = pd.read_csv('~/Downloads/Bill_Purchases_All.csv', parse_dates=parse_dates)\n"
+     ]
+    }
+   ],
+   "source": [
+    "import numpy as np\n",
+    "import pandas as pd\n",
+    "\n",
+    "parse_dates = ['Bill Date']\n",
+    "df = pd.read_csv('~/Downloads/Bill_Purchases_All.csv', parse_dates=parse_dates)\n",
+    "df['fiscal_year'] = np.where(df['Bill Date'].dt.month >= 4, df['Bill Date'].dt.year,  df['Bill Date'].dt.year-1)\n",
+    "df['account_clean'] = np.where(df['Tax Percentage'] > 0, 'GST Purchase @ '+ df[\"Tax Percentage\"].round(0).astype(str) +'%', df['Account'])\n",
+    "df['item_account_type_clean'] = np.where(df['Tax Name'].str.startswith(\"GST\") & (df['Item Account Type'].str.strip() == ''),\n",
+    "                                         'Expense', df['Item Account Type'])"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": null,
+   "metadata": {},
+   "outputs": [],
+   "source": [
+    "df.to_csv('~/Downloads/account_cleaned.csv')"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": null,
+   "metadata": {},
+   "outputs": [
+    {
+     "data": {
+      "text/plain": [
+       "nan"
+      ]
+     },
+     "execution_count": 7,
+     "metadata": {},
+     "output_type": "execute_result"
+    }
+   ],
+   "source": [
+    "df['Item Account Type'][2]"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": null,
+   "metadata": {},
+   "outputs": [
+    {
+     "data": {
+      "text/plain": [
+       "0             Expense\n",
+       "1             Expense\n",
+       "2                 nan\n",
+       "3             Expense\n",
+       "4             Expense\n",
+       "            ...      \n",
+       "9300              nan\n",
+       "9301          Expense\n",
+       "9302          Expense\n",
+       "9303          Expense\n",
+       "9304    Other Expense\n",
+       "Name: Item Account Type, Length: 9305, dtype: object"
+      ]
+     },
+     "execution_count": 8,
+     "metadata": {},
+     "output_type": "execute_result"
+    }
+   ],
+   "source": [
+    "df['Item Account Type'].astype(str)"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": null,
+   "id": "ae816316-b82b-4572-b537-15402084dd8b",
+   "metadata": {},
+   "outputs": [
+    {
+     "name": "stderr",
+     "output_type": "stream",
+     "text": [
+      "<ipython-input-9-221b24fba631>:5: DtypeWarning: Columns (48,50) have mixed types. Specify dtype option on import or set low_memory=False.\n",
+      "  df = pd.read_csv('~/Downloads/Bill_Purchases_All.csv', parse_dates=parse_dates)\n"
+     ]
+    }
+   ],
+   "source": [
+    "import numpy as np\n",
+    "import pandas as pd\n",
+    "\n",
+    "parse_dates = ['Bill Date']\n",
+    "df = pd.read_csv('~/Downloads/Bill_Purchases_All.csv', parse_dates=parse_dates)\n",
+    "df['fiscal_year'] = np.where(df['Bill Date'].dt.month >= 4, df['Bill Date'].dt.year,  df['Bill Date'].dt.year-1)\n",
+    "df['account_clean'] = np.where(df['Tax Percentage'] > 0, 'GST Purchase @ '+ df[\"Tax Percentage\"].round(0).astype(str) +'%', df['Account'])\n",
+    "df['item_account_type_clean'] = np.where(df['Tax Name'].str.startswith(\"GST\") & df['Item Account Type'].isnull(),\n",
+    "                                         'Expense', df['Item Account Type'])"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": null,
+   "id": "4567cd00-f065-462d-81a4-70c702c0f735",
+   "metadata": {},
+   "outputs": [
+    {
+     "name": "stderr",
+     "output_type": "stream",
+     "text": [
+      "<ipython-input-10-221b24fba631>:5: DtypeWarning: Columns (48,50) have mixed types. Specify dtype option on import or set low_memory=False.\n",
+      "  df = pd.read_csv('~/Downloads/Bill_Purchases_All.csv', parse_dates=parse_dates)\n"
+     ]
+    }
+   ],
+   "source": [
+    "import numpy as np\n",
+    "import pandas as pd\n",
+    "\n",
+    "parse_dates = ['Bill Date']\n",
+    "df = pd.read_csv('~/Downloads/Bill_Purchases_All.csv', parse_dates=parse_dates)\n",
+    "df['fiscal_year'] = np.where(df['Bill Date'].dt.month >= 4, df['Bill Date'].dt.year,  df['Bill Date'].dt.year-1)\n",
+    "df['account_clean'] = np.where(df['Tax Percentage'] > 0, 'GST Purchase @ '+ df[\"Tax Percentage\"].round(0).astype(str) +'%', df['Account'])\n",
+    "df['item_account_type_clean'] = np.where(df['Tax Name'].str.startswith(\"GST\") & df['Item Account Type'].isnull(),\n",
+    "                                         'Expense', df['Item Account Type'])"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": null,
+   "metadata": {},
+   "outputs": [],
+   "source": [
+    "df.to_csv('~/Downloads/accounts_cleaned')"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": null,
+   "id": "40904c41-66c9-4f0f-8f0c-bea60a9c8d91",
+   "metadata": {},
+   "outputs": [
+    {
+     "name": "stderr",
+     "output_type": "stream",
+     "text": [
+      "<ipython-input-12-5315ad1f71b3>:5: DtypeWarning: Columns (48,50) have mixed types. Specify dtype option on import or set low_memory=False.\n",
+      "  df = pd.read_csv('~/Downloads/Bill_Purchases_All.csv', parse_dates=parse_dates)\n"
+     ]
+    }
+   ],
+   "source": [
+    "import numpy as np\n",
+    "import pandas as pd\n",
+    "\n",
+    "parse_dates = ['Bill Date']\n",
+    "df = pd.read_csv('~/Downloads/Bill_Purchases_All.csv', parse_dates=parse_dates)\n",
+    "df['fiscal_year'] = np.where(df['Bill Date'].dt.month >= 4, df['Bill Date'].dt.year,  df['Bill Date'].dt.year-1)\n",
+    "df['account_clean'] = np.where(df['Tax Percentage'] > 0, 'GST Purchase @ '+ df[\"Tax Percentage\"].round(0).astype(str) +'%', df['Account'])\n",
+    "df['item_account_type_clean'] = np.where(df['Tax Name'].str.startswith(\"GST\") & df['Item Account Type'].isnull(),\n",
+    "                                         'Expense', df['Item Account Type'])\n",
+    "\n",
+    "# for yr in range(2017,2023):\n",
+    "#     df_yr = df[df.fiscal_year == yr]\n",
+    "#     fiscal_year_prefix = ((yr % 100) * 100) + ((yr % 100) + 1)\n",
+    "#     df_yr.to_csv(f'~/Downloads/Bill_Purchases_{yr}.csv', index=False)\n",
+    "\n",
+    "# for each of the above df_yr dataframe, create a file for each quarter in that fiscal year \n",
+    "# in seperate folders\n",
+    "for yr in range(2017, 2023):\n",
+    "    df_yr = df[df.fiscal_year == yr]\n",
+    "    fiscal_year_prefix = ((yr % 100) * 100) + ((yr % 100) + 1)\n",
+    "    for qtr in range(1, 5):\n",
+    "        df_qtr = df_yr[df_yr['Bill Date'].dt.to_period('Q-MAR').dt.quarter == qtr]\n",
+    "        df_qtr.to_csv(f'~/Downloads/Bill_Purchases_{fiscal_year_prefix}_Q{qtr}.csv', index=False)"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": null,
+   "id": "703bb2da-7de3-42c3-8c64-680475d72b9c",
+   "metadata": {},
+   "outputs": [
+    {
+     "name": "stderr",
+     "output_type": "stream",
+     "text": [
+      "<ipython-input-13-5315ad1f71b3>:5: DtypeWarning: Columns (48,50) have mixed types. Specify dtype option on import or set low_memory=False.\n",
+      "  df = pd.read_csv('~/Downloads/Bill_Purchases_All.csv', parse_dates=parse_dates)\n"
+     ]
+    }
+   ],
+   "source": [
+    "import numpy as np\n",
+    "import pandas as pd\n",
+    "\n",
+    "parse_dates = ['Bill Date']\n",
+    "df = pd.read_csv('~/Downloads/Bill_Purchases_All.csv', parse_dates=parse_dates)\n",
+    "df['fiscal_year'] = np.where(df['Bill Date'].dt.month >= 4, df['Bill Date'].dt.year,  df['Bill Date'].dt.year-1)\n",
+    "df['account_clean'] = np.where(df['Tax Percentage'] > 0, 'GST Purchase @ '+ df[\"Tax Percentage\"].round(0).astype(str) +'%', df['Account'])\n",
+    "df['item_account_type_clean'] = np.where(df['Tax Name'].str.startswith(\"GST\") & df['Item Account Type'].isnull(),\n",
+    "                                         'Expense', df['Item Account Type'])\n",
+    "\n",
+    "# for yr in range(2017,2023):\n",
+    "#     df_yr = df[df.fiscal_year == yr]\n",
+    "#     fiscal_year_prefix = ((yr % 100) * 100) + ((yr % 100) + 1)\n",
+    "#     df_yr.to_csv(f'~/Downloads/Bill_Purchases_{yr}.csv', index=False)\n",
+    "\n",
+    "# for each of the above df_yr dataframe, create a file for each quarter in that fiscal year \n",
+    "# in seperate folders\n",
+    "for yr in range(2017, 2023):\n",
+    "    df_yr = df[df.fiscal_year == yr]\n",
+    "    fiscal_year_prefix = ((yr % 100) * 100) + ((yr % 100) + 1)\n",
+    "    for qtr in range(1, 5):\n",
+    "        df_qtr = df_yr[df_yr['Bill Date'].dt.to_period('Q-MAR').dt.quarter == qtr]\n",
+    "        df_qtr.to_csv(f'~/Downloads/Bill_Purchases_{fiscal_year_prefix}_Q{qtr}.csv', index=False)"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": null,
+   "id": "931b87c0-2ec4-407b-a545-e06ca31d0e43",
+   "metadata": {},
+   "outputs": [
+    {
+     "name": "stderr",
+     "output_type": "stream",
+     "text": [
+      "<ipython-input-14-902a87773a2a>:5: DtypeWarning: Columns (48,50) have mixed types. Specify dtype option on import or set low_memory=False.\n",
+      "  df = pd.read_csv('~/Downloads/Bill_Purchases_All.csv', parse_dates=parse_dates)\n"
+     ]
+    },
+    {
+     "ename": "IntCastingNaNError",
+     "evalue": "Cannot convert non-finite values (NA or inf) to integer",
+     "output_type": "error",
+     "traceback": [
+      "\u001b[0;31m---------------------------------------------------------------------------\u001b[0m",
+      "\u001b[0;31mIntCastingNaNError\u001b[0m                        Traceback (most recent call last)",
+      "File \u001b[1;32mUntitled-1:7\u001b[0m\n\u001b[1;32m      5\u001b[0m df \u001b[39m=\u001b[39m pd\u001b[39m.\u001b[39mread_csv(\u001b[39m'\u001b[39m\u001b[39m~/Downloads/Bill_Purchases_All.csv\u001b[39m\u001b[39m'\u001b[39m, parse_dates\u001b[39m=\u001b[39mparse_dates)\n\u001b[1;32m      6\u001b[0m df[\u001b[39m'\u001b[39m\u001b[39mfiscal_year\u001b[39m\u001b[39m'\u001b[39m] \u001b[39m=\u001b[39m np\u001b[39m.\u001b[39mwhere(df[\u001b[39m'\u001b[39m\u001b[39mBill Date\u001b[39m\u001b[39m'\u001b[39m]\u001b[39m.\u001b[39mdt\u001b[39m.\u001b[39mmonth \u001b[39m>\u001b[39m\u001b[39m=\u001b[39m \u001b[39m4\u001b[39m, df[\u001b[39m'\u001b[39m\u001b[39mBill Date\u001b[39m\u001b[39m'\u001b[39m]\u001b[39m.\u001b[39mdt\u001b[39m.\u001b[39myear,  df[\u001b[39m'\u001b[39m\u001b[39mBill Date\u001b[39m\u001b[39m'\u001b[39m]\u001b[39m.\u001b[39mdt\u001b[39m.\u001b[39myear\u001b[39m-\u001b[39m\u001b[39m1\u001b[39m)\n\u001b[0;32m----> 7\u001b[0m df[\u001b[39m'\u001b[39m\u001b[39maccount_clean\u001b[39m\u001b[39m'\u001b[39m] \u001b[39m=\u001b[39m np\u001b[39m.\u001b[39mwhere(df[\u001b[39m'\u001b[39m\u001b[39mTax Percentage\u001b[39m\u001b[39m'\u001b[39m] \u001b[39m>\u001b[39m \u001b[39m0\u001b[39m, \u001b[39m'\u001b[39m\u001b[39mGST Purchase @ \u001b[39m\u001b[39m'\u001b[39m\u001b[39m+\u001b[39m df[\u001b[39m\"\u001b[39;49m\u001b[39mTax Percentage\u001b[39;49m\u001b[39m\"\u001b[39;49m]\u001b[39m.\u001b[39;49mastype(\u001b[39mint\u001b[39;49m)\u001b[39m.\u001b[39mastype(\u001b[39mstr\u001b[39m) \u001b[39m+\u001b[39m\u001b[39m'\u001b[39m\u001b[39m%\u001b[39m\u001b[39m'\u001b[39m, df[\u001b[39m'\u001b[39m\u001b[39mAccount\u001b[39m\u001b[39m'\u001b[39m])\n\u001b[1;32m      8\u001b[0m df[\u001b[39m'\u001b[39m\u001b[39mitem_account_type_clean\u001b[39m\u001b[39m'\u001b[39m] \u001b[39m=\u001b[39m np\u001b[39m.\u001b[39mwhere(df[\u001b[39m'\u001b[39m\u001b[39mTax Name\u001b[39m\u001b[39m'\u001b[39m]\u001b[39m.\u001b[39mstr\u001b[39m.\u001b[39mstartswith(\u001b[39m\"\u001b[39m\u001b[39mGST\u001b[39m\u001b[39m\"\u001b[39m) \u001b[39m&\u001b[39m df[\u001b[39m'\u001b[39m\u001b[39mItem Account Type\u001b[39m\u001b[39m'\u001b[39m]\u001b[39m.\u001b[39misnull(),\n\u001b[1;32m      9\u001b[0m                                          \u001b[39m'\u001b[39m\u001b[39mExpense\u001b[39m\u001b[39m'\u001b[39m, df[\u001b[39m'\u001b[39m\u001b[39mItem Account Type\u001b[39m\u001b[39m'\u001b[39m])\n\u001b[1;32m     11\u001b[0m \u001b[39m# for yr in range(2017,2023):\u001b[39;00m\n\u001b[1;32m     12\u001b[0m \u001b[39m#     df_yr = df[df.fiscal_year == yr]\u001b[39;00m\n\u001b[1;32m     13\u001b[0m \u001b[39m#     fiscal_year_prefix = ((yr % 100) * 100) + ((yr % 100) + 1)\u001b[39;00m\n\u001b[0;32m   (...)\u001b[0m\n\u001b[1;32m     16\u001b[0m \u001b[39m# for each of the above df_yr dataframe, create a file for each quarter in that fiscal year \u001b[39;00m\n\u001b[1;32m     17\u001b[0m \u001b[39m# in seperate folders\u001b[39;00m\n",
+      "File \u001b[0;32m~/coding/sisyphus/PdWorkout/.venv/lib/python3.12/site-packages/pandas/core/generic.py:6643\u001b[0m, in \u001b[0;36mNDFrame.astype\u001b[0;34m(self, dtype, copy, errors)\u001b[0m\n\u001b[1;32m   6637\u001b[0m     results \u001b[39m=\u001b[39m [\n\u001b[1;32m   6638\u001b[0m         ser\u001b[39m.\u001b[39mastype(dtype, copy\u001b[39m=\u001b[39mcopy, errors\u001b[39m=\u001b[39merrors) \u001b[39mfor\u001b[39;00m _, ser \u001b[39min\u001b[39;00m \u001b[39mself\u001b[39m\u001b[39m.\u001b[39mitems()\n\u001b[1;32m   6639\u001b[0m     ]\n\u001b[1;32m   6641\u001b[0m \u001b[39melse\u001b[39;00m:\n\u001b[1;32m   6642\u001b[0m     \u001b[39m# else, only a single dtype is given\u001b[39;00m\n\u001b[0;32m-> 6643\u001b[0m     new_data \u001b[39m=\u001b[39m \u001b[39mself\u001b[39;49m\u001b[39m.\u001b[39;49m_mgr\u001b[39m.\u001b[39;49mastype(dtype\u001b[39m=\u001b[39;49mdtype, copy\u001b[39m=\u001b[39;49mcopy, errors\u001b[39m=\u001b[39;49merrors)\n\u001b[1;32m   6644\u001b[0m     res \u001b[39m=\u001b[39m \u001b[39mself\u001b[39m\u001b[39m.\u001b[39m_constructor_from_mgr(new_data, axes\u001b[39m=\u001b[39mnew_data\u001b[39m.\u001b[39maxes)\n\u001b[1;32m   6645\u001b[0m     \u001b[39mreturn\u001b[39;00m res\u001b[39m.\u001b[39m__finalize__(\u001b[39mself\u001b[39m, method\u001b[39m=\u001b[39m\u001b[39m\"\u001b[39m\u001b[39mastype\u001b[39m\u001b[39m\"\u001b[39m)\n",
+      "File \u001b[0;32m~/coding/sisyphus/PdWorkout/.venv/lib/python3.12/site-packages/pandas/core/internals/managers.py:430\u001b[0m, in \u001b[0;36mBaseBlockManager.astype\u001b[0;34m(self, dtype, copy, errors)\u001b[0m\n\u001b[1;32m    427\u001b[0m \u001b[39melif\u001b[39;00m using_copy_on_write():\n\u001b[1;32m    428\u001b[0m     copy \u001b[39m=\u001b[39m \u001b[39mFalse\u001b[39;00m\n\u001b[0;32m--> 430\u001b[0m \u001b[39mreturn\u001b[39;00m \u001b[39mself\u001b[39;49m\u001b[39m.\u001b[39;49mapply(\n\u001b[1;32m    431\u001b[0m     \u001b[39m\"\u001b[39;49m\u001b[39mastype\u001b[39;49m\u001b[39m\"\u001b[39;49m,\n\u001b[1;32m    432\u001b[0m     dtype\u001b[39m=\u001b[39;49mdtype,\n\u001b[1;32m    433\u001b[0m     copy\u001b[39m=\u001b[39;49mcopy,\n\u001b[1;32m    434\u001b[0m     errors\u001b[39m=\u001b[39;49merrors,\n\u001b[1;32m    435\u001b[0m     using_cow\u001b[39m=\u001b[39;49musing_copy_on_write(),\n\u001b[1;32m    436\u001b[0m )\n",
+      "File \u001b[0;32m~/coding/sisyphus/PdWorkout/.venv/lib/python3.12/site-packages/pandas/core/internals/managers.py:363\u001b[0m, in \u001b[0;36mBaseBlockManager.apply\u001b[0;34m(self, f, align_keys, **kwargs)\u001b[0m\n\u001b[1;32m    361\u001b[0m         applied \u001b[39m=\u001b[39m b\u001b[39m.\u001b[39mapply(f, \u001b[39m*\u001b[39m\u001b[39m*\u001b[39mkwargs)\n\u001b[1;32m    362\u001b[0m     \u001b[39melse\u001b[39;00m:\n\u001b[0;32m--> 363\u001b[0m         applied \u001b[39m=\u001b[39m \u001b[39mgetattr\u001b[39;49m(b, f)(\u001b[39m*\u001b[39;49m\u001b[39m*\u001b[39;49mkwargs)\n\u001b[1;32m    364\u001b[0m     result_blocks \u001b[39m=\u001b[39m extend_blocks(applied, result_blocks)\n\u001b[1;32m    366\u001b[0m out \u001b[39m=\u001b[39m \u001b[39mtype\u001b[39m(\u001b[39mself\u001b[39m)\u001b[39m.\u001b[39mfrom_blocks(result_blocks, \u001b[39mself\u001b[39m\u001b[39m.\u001b[39maxes)\n",
+      "File \u001b[0;32m~/coding/sisyphus/PdWorkout/.venv/lib/python3.12/site-packages/pandas/core/internals/blocks.py:758\u001b[0m, in \u001b[0;36mBlock.astype\u001b[0;34m(self, dtype, copy, errors, using_cow, squeeze)\u001b[0m\n\u001b[1;32m    755\u001b[0m         \u001b[39mraise\u001b[39;00m \u001b[39mValueError\u001b[39;00m(\u001b[39m\"\u001b[39m\u001b[39mCan not squeeze with more than one column.\u001b[39m\u001b[39m\"\u001b[39m)\n\u001b[1;32m    756\u001b[0m     values \u001b[39m=\u001b[39m values[\u001b[39m0\u001b[39m, :]  \u001b[39m# type: ignore[call-overload]\u001b[39;00m\n\u001b[0;32m--> 758\u001b[0m new_values \u001b[39m=\u001b[39m astype_array_safe(values, dtype, copy\u001b[39m=\u001b[39;49mcopy, errors\u001b[39m=\u001b[39;49merrors)\n\u001b[1;32m    760\u001b[0m new_values \u001b[39m=\u001b[39m maybe_coerce_values(new_values)\n\u001b[1;32m    762\u001b[0m refs \u001b[39m=\u001b[39m \u001b[39mNone\u001b[39;00m\n",
+      "File \u001b[0;32m~/coding/sisyphus/PdWorkout/.venv/lib/python3.12/site-packages/pandas/core/dtypes/astype.py:237\u001b[0m, in \u001b[0;36mastype_array_safe\u001b[0;34m(values, dtype, copy, errors)\u001b[0m\n\u001b[1;32m    234\u001b[0m     dtype \u001b[39m=\u001b[39m dtype\u001b[39m.\u001b[39mnumpy_dtype\n\u001b[1;32m    236\u001b[0m \u001b[39mtry\u001b[39;00m:\n\u001b[0;32m--> 237\u001b[0m     new_values \u001b[39m=\u001b[39m astype_array(values, dtype, copy\u001b[39m=\u001b[39;49mcopy)\n\u001b[1;32m    238\u001b[0m \u001b[39mexcept\u001b[39;00m (\u001b[39mValueError\u001b[39;00m, \u001b[39mTypeError\u001b[39;00m):\n\u001b[1;32m    239\u001b[0m     \u001b[39m# e.g. _astype_nansafe can fail on object-dtype of strings\u001b[39;00m\n\u001b[1;32m    240\u001b[0m     \u001b[39m#  trying to convert to float\u001b[39;00m\n\u001b[1;32m    241\u001b[0m     \u001b[39mif\u001b[39;00m errors \u001b[39m==\u001b[39m \u001b[39m\"\u001b[39m\u001b[39mignore\u001b[39m\u001b[39m\"\u001b[39m:\n",
+      "File \u001b[0;32m~/coding/sisyphus/PdWorkout/.venv/lib/python3.12/site-packages/pandas/core/dtypes/astype.py:182\u001b[0m, in \u001b[0;36mastype_array\u001b[0;34m(values, dtype, copy)\u001b[0m\n\u001b[1;32m    179\u001b[0m     values \u001b[39m=\u001b[39m values\u001b[39m.\u001b[39mastype(dtype, copy\u001b[39m=\u001b[39mcopy)\n\u001b[1;32m    181\u001b[0m \u001b[39melse\u001b[39;00m:\n\u001b[0;32m--> 182\u001b[0m     values \u001b[39m=\u001b[39m _astype_nansafe(values, dtype, copy\u001b[39m=\u001b[39;49mcopy)\n\u001b[1;32m    184\u001b[0m \u001b[39m# in pandas we don't store numpy str dtypes, so convert to object\u001b[39;00m\n\u001b[1;32m    185\u001b[0m \u001b[39mif\u001b[39;00m \u001b[39misinstance\u001b[39m(dtype, np\u001b[39m.\u001b[39mdtype) \u001b[39mand\u001b[39;00m \u001b[39missubclass\u001b[39m(values\u001b[39m.\u001b[39mdtype\u001b[39m.\u001b[39mtype, \u001b[39mstr\u001b[39m):\n",
+      "File \u001b[0;32m~/coding/sisyphus/PdWorkout/.venv/lib/python3.12/site-packages/pandas/core/dtypes/astype.py:101\u001b[0m, in \u001b[0;36m_astype_nansafe\u001b[0;34m(arr, dtype, copy, skipna)\u001b[0m\n\u001b[1;32m     96\u001b[0m     \u001b[39mreturn\u001b[39;00m lib\u001b[39m.\u001b[39mensure_string_array(\n\u001b[1;32m     97\u001b[0m         arr, skipna\u001b[39m=\u001b[39mskipna, convert_na_value\u001b[39m=\u001b[39m\u001b[39mFalse\u001b[39;00m\n\u001b[1;32m     98\u001b[0m     )\u001b[39m.\u001b[39mreshape(shape)\n\u001b[1;32m    100\u001b[0m \u001b[39melif\u001b[39;00m np\u001b[39m.\u001b[39missubdtype(arr\u001b[39m.\u001b[39mdtype, np\u001b[39m.\u001b[39mfloating) \u001b[39mand\u001b[39;00m dtype\u001b[39m.\u001b[39mkind \u001b[39min\u001b[39;00m \u001b[39m\"\u001b[39m\u001b[39miu\u001b[39m\u001b[39m\"\u001b[39m:\n\u001b[0;32m--> 101\u001b[0m     \u001b[39mreturn\u001b[39;00m _astype_float_to_int_nansafe(arr, dtype, copy)\n\u001b[1;32m    103\u001b[0m \u001b[39melif\u001b[39;00m arr\u001b[39m.\u001b[39mdtype \u001b[39m==\u001b[39m \u001b[39mobject\u001b[39m:\n\u001b[1;32m    104\u001b[0m     \u001b[39m# if we have a datetime/timedelta array of objects\u001b[39;00m\n\u001b[1;32m    105\u001b[0m     \u001b[39m# then coerce to datetime64[ns] and use DatetimeArray.astype\u001b[39;00m\n\u001b[1;32m    107\u001b[0m     \u001b[39mif\u001b[39;00m lib\u001b[39m.\u001b[39mis_np_dtype(dtype, \u001b[39m\"\u001b[39m\u001b[39mM\u001b[39m\u001b[39m\"\u001b[39m):\n",
+      "File \u001b[0;32m~/coding/sisyphus/PdWorkout/.venv/lib/python3.12/site-packages/pandas/core/dtypes/astype.py:145\u001b[0m, in \u001b[0;36m_astype_float_to_int_nansafe\u001b[0;34m(values, dtype, copy)\u001b[0m\n\u001b[1;32m    141\u001b[0m \u001b[39m\u001b[39m\u001b[39m\"\"\"\u001b[39;00m\n\u001b[1;32m    142\u001b[0m \u001b[39mastype with a check preventing converting NaN to an meaningless integer value.\u001b[39;00m\n\u001b[1;32m    143\u001b[0m \u001b[39m\"\"\"\u001b[39;00m\n\u001b[1;32m    144\u001b[0m \u001b[39mif\u001b[39;00m \u001b[39mnot\u001b[39;00m np\u001b[39m.\u001b[39misfinite(values)\u001b[39m.\u001b[39mall():\n\u001b[0;32m--> 145\u001b[0m     \u001b[39mraise\u001b[39;00m IntCastingNaNError(\n\u001b[1;32m    146\u001b[0m         \u001b[39m\"\u001b[39m\u001b[39mCannot convert non-finite values (NA or inf) to integer\u001b[39m\u001b[39m\"\u001b[39m\n\u001b[1;32m    147\u001b[0m     )\n\u001b[1;32m    148\u001b[0m \u001b[39mif\u001b[39;00m dtype\u001b[39m.\u001b[39mkind \u001b[39m==\u001b[39m \u001b[39m\"\u001b[39m\u001b[39mu\u001b[39m\u001b[39m\"\u001b[39m:\n\u001b[1;32m    149\u001b[0m     \u001b[39m# GH#45151\u001b[39;00m\n\u001b[1;32m    150\u001b[0m     \u001b[39mif\u001b[39;00m \u001b[39mnot\u001b[39;00m (values \u001b[39m>\u001b[39m\u001b[39m=\u001b[39m \u001b[39m0\u001b[39m)\u001b[39m.\u001b[39mall():\n",
+      "\u001b[0;31mIntCastingNaNError\u001b[0m: Cannot convert non-finite values (NA or inf) to integer"
+     ]
+    }
+   ],
+   "source": [
+    "import numpy as np\n",
+    "import pandas as pd\n",
+    "\n",
+    "parse_dates = ['Bill Date']\n",
+    "df = pd.read_csv('~/Downloads/Bill_Purchases_All.csv', parse_dates=parse_dates)\n",
+    "df['fiscal_year'] = np.where(df['Bill Date'].dt.month >= 4, df['Bill Date'].dt.year,  df['Bill Date'].dt.year-1)\n",
+    "df['account_clean'] = np.where(df['Tax Percentage'] > 0, 'GST Purchase @ '+ df[\"Tax Percentage\"].astype(int).astype(str) +'%', df['Account'])\n",
+    "df['item_account_type_clean'] = np.where(df['Tax Name'].str.startswith(\"GST\") & df['Item Account Type'].isnull(),\n",
+    "                                         'Expense', df['Item Account Type'])\n",
+    "\n",
+    "# for yr in range(2017,2023):\n",
+    "#     df_yr = df[df.fiscal_year == yr]\n",
+    "#     fiscal_year_prefix = ((yr % 100) * 100) + ((yr % 100) + 1)\n",
+    "#     df_yr.to_csv(f'~/Downloads/Bill_Purchases_{yr}.csv', index=False)\n",
+    "\n",
+    "# for each of the above df_yr dataframe, create a file for each quarter in that fiscal year \n",
+    "# in seperate folders\n",
+    "for yr in range(2017, 2023):\n",
+    "    df_yr = df[df.fiscal_year == yr]\n",
+    "    fiscal_year_prefix = ((yr % 100) * 100) + ((yr % 100) + 1)\n",
+    "    for qtr in range(1, 5):\n",
+    "        df_qtr = df_yr[df_yr['Bill Date'].dt.to_period('Q-MAR').dt.quarter == qtr]\n",
+    "        df_qtr.to_csv(f'~/Downloads/Bill_Purchases_{fiscal_year_prefix}_Q{qtr}.csv', index=False)"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": null,
+   "id": "6ff40264-924a-4d82-bfdb-69362a1e8b8e",
+   "metadata": {},
+   "outputs": [
+    {
+     "name": "stderr",
+     "output_type": "stream",
+     "text": [
+      "<ipython-input-15-27f9873b32de>:5: DtypeWarning: Columns (48,50) have mixed types. Specify dtype option on import or set low_memory=False.\n",
+      "  df = pd.read_csv('~/Downloads/Bill_Purchases_All.csv', parse_dates=parse_dates)\n"
+     ]
+    },
+    {
+     "ename": "IntCastingNaNError",
+     "evalue": "Cannot convert non-finite values (NA or inf) to integer",
+     "output_type": "error",
+     "traceback": [
+      "\u001b[0;31m---------------------------------------------------------------------------\u001b[0m",
+      "\u001b[0;31mIntCastingNaNError\u001b[0m                        Traceback (most recent call last)",
+      "File \u001b[1;32mUntitled-1:7\u001b[0m\n\u001b[1;32m      5\u001b[0m df \u001b[39m=\u001b[39m pd\u001b[39m.\u001b[39mread_csv(\u001b[39m'\u001b[39m\u001b[39m~/Downloads/Bill_Purchases_All.csv\u001b[39m\u001b[39m'\u001b[39m, parse_dates\u001b[39m=\u001b[39mparse_dates)\n\u001b[1;32m      6\u001b[0m df[\u001b[39m'\u001b[39m\u001b[39mfiscal_year\u001b[39m\u001b[39m'\u001b[39m] \u001b[39m=\u001b[39m np\u001b[39m.\u001b[39mwhere(df[\u001b[39m'\u001b[39m\u001b[39mBill Date\u001b[39m\u001b[39m'\u001b[39m]\u001b[39m.\u001b[39mdt\u001b[39m.\u001b[39mmonth \u001b[39m>\u001b[39m\u001b[39m=\u001b[39m \u001b[39m4\u001b[39m, df[\u001b[39m'\u001b[39m\u001b[39mBill Date\u001b[39m\u001b[39m'\u001b[39m]\u001b[39m.\u001b[39mdt\u001b[39m.\u001b[39myear,  df[\u001b[39m'\u001b[39m\u001b[39mBill Date\u001b[39m\u001b[39m'\u001b[39m]\u001b[39m.\u001b[39mdt\u001b[39m.\u001b[39myear\u001b[39m-\u001b[39m\u001b[39m1\u001b[39m)\n\u001b[0;32m----> 7\u001b[0m df[\u001b[39m'\u001b[39m\u001b[39maccount_clean\u001b[39m\u001b[39m'\u001b[39m] \u001b[39m=\u001b[39m np\u001b[39m.\u001b[39mwhere(df[\u001b[39m'\u001b[39m\u001b[39mTax Percentage\u001b[39m\u001b[39m'\u001b[39m] \u001b[39m>\u001b[39m \u001b[39m0\u001b[39m \u001b[39m&\u001b[39m df[\u001b[39m'\u001b[39m\u001b[39mTax Percentage\u001b[39m\u001b[39m'\u001b[39m]\u001b[39m.\u001b[39mnotnull(), \u001b[39m'\u001b[39m\u001b[39mGST Purchase @ \u001b[39m\u001b[39m'\u001b[39m\u001b[39m+\u001b[39m df[\u001b[39m\"\u001b[39;49m\u001b[39mTax Percentage\u001b[39;49m\u001b[39m\"\u001b[39;49m]\u001b[39m.\u001b[39;49mastype(\u001b[39mint\u001b[39;49m)\u001b[39m.\u001b[39mastype(\u001b[39mstr\u001b[39m) \u001b[39m+\u001b[39m\u001b[39m'\u001b[39m\u001b[39m%\u001b[39m\u001b[39m'\u001b[39m, df[\u001b[39m'\u001b[39m\u001b[39mAccount\u001b[39m\u001b[39m'\u001b[39m])\n\u001b[1;32m      8\u001b[0m df[\u001b[39m'\u001b[39m\u001b[39mitem_account_type_clean\u001b[39m\u001b[39m'\u001b[39m] \u001b[39m=\u001b[39m np\u001b[39m.\u001b[39mwhere(df[\u001b[39m'\u001b[39m\u001b[39mTax Name\u001b[39m\u001b[39m'\u001b[39m]\u001b[39m.\u001b[39mstr\u001b[39m.\u001b[39mstartswith(\u001b[39m\"\u001b[39m\u001b[39mGST\u001b[39m\u001b[39m\"\u001b[39m) \u001b[39m&\u001b[39m df[\u001b[39m'\u001b[39m\u001b[39mItem Account Type\u001b[39m\u001b[39m'\u001b[39m]\u001b[39m.\u001b[39misnull(),\n\u001b[1;32m      9\u001b[0m                                          \u001b[39m'\u001b[39m\u001b[39mExpense\u001b[39m\u001b[39m'\u001b[39m, df[\u001b[39m'\u001b[39m\u001b[39mItem Account Type\u001b[39m\u001b[39m'\u001b[39m])\n\u001b[1;32m     11\u001b[0m \u001b[39m# for yr in range(2017,2023):\u001b[39;00m\n\u001b[1;32m     12\u001b[0m \u001b[39m#     df_yr = df[df.fiscal_year == yr]\u001b[39;00m\n\u001b[1;32m     13\u001b[0m \u001b[39m#     fiscal_year_prefix = ((yr % 100) * 100) + ((yr % 100) + 1)\u001b[39;00m\n\u001b[0;32m   (...)\u001b[0m\n\u001b[1;32m     16\u001b[0m \u001b[39m# for each of the above df_yr dataframe, create a file for each quarter in that fiscal year \u001b[39;00m\n\u001b[1;32m     17\u001b[0m \u001b[39m# in seperate folders\u001b[39;00m\n",
+      "File \u001b[0;32m~/coding/sisyphus/PdWorkout/.venv/lib/python3.12/site-packages/pandas/core/generic.py:6643\u001b[0m, in \u001b[0;36mNDFrame.astype\u001b[0;34m(self, dtype, copy, errors)\u001b[0m\n\u001b[1;32m   6637\u001b[0m     results \u001b[39m=\u001b[39m [\n\u001b[1;32m   6638\u001b[0m         ser\u001b[39m.\u001b[39mastype(dtype, copy\u001b[39m=\u001b[39mcopy, errors\u001b[39m=\u001b[39merrors) \u001b[39mfor\u001b[39;00m _, ser \u001b[39min\u001b[39;00m \u001b[39mself\u001b[39m\u001b[39m.\u001b[39mitems()\n\u001b[1;32m   6639\u001b[0m     ]\n\u001b[1;32m   6641\u001b[0m \u001b[39melse\u001b[39;00m:\n\u001b[1;32m   6642\u001b[0m     \u001b[39m# else, only a single dtype is given\u001b[39;00m\n\u001b[0;32m-> 6643\u001b[0m     new_data \u001b[39m=\u001b[39m \u001b[39mself\u001b[39;49m\u001b[39m.\u001b[39;49m_mgr\u001b[39m.\u001b[39;49mastype(dtype\u001b[39m=\u001b[39;49mdtype, copy\u001b[39m=\u001b[39;49mcopy, errors\u001b[39m=\u001b[39;49merrors)\n\u001b[1;32m   6644\u001b[0m     res \u001b[39m=\u001b[39m \u001b[39mself\u001b[39m\u001b[39m.\u001b[39m_constructor_from_mgr(new_data, axes\u001b[39m=\u001b[39mnew_data\u001b[39m.\u001b[39maxes)\n\u001b[1;32m   6645\u001b[0m     \u001b[39mreturn\u001b[39;00m res\u001b[39m.\u001b[39m__finalize__(\u001b[39mself\u001b[39m, method\u001b[39m=\u001b[39m\u001b[39m\"\u001b[39m\u001b[39mastype\u001b[39m\u001b[39m\"\u001b[39m)\n",
+      "File \u001b[0;32m~/coding/sisyphus/PdWorkout/.venv/lib/python3.12/site-packages/pandas/core/internals/managers.py:430\u001b[0m, in \u001b[0;36mBaseBlockManager.astype\u001b[0;34m(self, dtype, copy, errors)\u001b[0m\n\u001b[1;32m    427\u001b[0m \u001b[39melif\u001b[39;00m using_copy_on_write():\n\u001b[1;32m    428\u001b[0m     copy \u001b[39m=\u001b[39m \u001b[39mFalse\u001b[39;00m\n\u001b[0;32m--> 430\u001b[0m \u001b[39mreturn\u001b[39;00m \u001b[39mself\u001b[39;49m\u001b[39m.\u001b[39;49mapply(\n\u001b[1;32m    431\u001b[0m     \u001b[39m\"\u001b[39;49m\u001b[39mastype\u001b[39;49m\u001b[39m\"\u001b[39;49m,\n\u001b[1;32m    432\u001b[0m     dtype\u001b[39m=\u001b[39;49mdtype,\n\u001b[1;32m    433\u001b[0m     copy\u001b[39m=\u001b[39;49mcopy,\n\u001b[1;32m    434\u001b[0m     errors\u001b[39m=\u001b[39;49merrors,\n\u001b[1;32m    435\u001b[0m     using_cow\u001b[39m=\u001b[39;49musing_copy_on_write(),\n\u001b[1;32m    436\u001b[0m )\n",
+      "File \u001b[0;32m~/coding/sisyphus/PdWorkout/.venv/lib/python3.12/site-packages/pandas/core/internals/managers.py:363\u001b[0m, in \u001b[0;36mBaseBlockManager.apply\u001b[0;34m(self, f, align_keys, **kwargs)\u001b[0m\n\u001b[1;32m    361\u001b[0m         applied \u001b[39m=\u001b[39m b\u001b[39m.\u001b[39mapply(f, \u001b[39m*\u001b[39m\u001b[39m*\u001b[39mkwargs)\n\u001b[1;32m    362\u001b[0m     \u001b[39melse\u001b[39;00m:\n\u001b[0;32m--> 363\u001b[0m         applied \u001b[39m=\u001b[39m \u001b[39mgetattr\u001b[39;49m(b, f)(\u001b[39m*\u001b[39;49m\u001b[39m*\u001b[39;49mkwargs)\n\u001b[1;32m    364\u001b[0m     result_blocks \u001b[39m=\u001b[39m extend_blocks(applied, result_blocks)\n\u001b[1;32m    366\u001b[0m out \u001b[39m=\u001b[39m \u001b[39mtype\u001b[39m(\u001b[39mself\u001b[39m)\u001b[39m.\u001b[39mfrom_blocks(result_blocks, \u001b[39mself\u001b[39m\u001b[39m.\u001b[39maxes)\n",
+      "File \u001b[0;32m~/coding/sisyphus/PdWorkout/.venv/lib/python3.12/site-packages/pandas/core/internals/blocks.py:758\u001b[0m, in \u001b[0;36mBlock.astype\u001b[0;34m(self, dtype, copy, errors, using_cow, squeeze)\u001b[0m\n\u001b[1;32m    755\u001b[0m         \u001b[39mraise\u001b[39;00m \u001b[39mValueError\u001b[39;00m(\u001b[39m\"\u001b[39m\u001b[39mCan not squeeze with more than one column.\u001b[39m\u001b[39m\"\u001b[39m)\n\u001b[1;32m    756\u001b[0m     values \u001b[39m=\u001b[39m values[\u001b[39m0\u001b[39m, :]  \u001b[39m# type: ignore[call-overload]\u001b[39;00m\n\u001b[0;32m--> 758\u001b[0m new_values \u001b[39m=\u001b[39m astype_array_safe(values, dtype, copy\u001b[39m=\u001b[39;49mcopy, errors\u001b[39m=\u001b[39;49merrors)\n\u001b[1;32m    760\u001b[0m new_values \u001b[39m=\u001b[39m maybe_coerce_values(new_values)\n\u001b[1;32m    762\u001b[0m refs \u001b[39m=\u001b[39m \u001b[39mNone\u001b[39;00m\n",
+      "File \u001b[0;32m~/coding/sisyphus/PdWorkout/.venv/lib/python3.12/site-packages/pandas/core/dtypes/astype.py:237\u001b[0m, in \u001b[0;36mastype_array_safe\u001b[0;34m(values, dtype, copy, errors)\u001b[0m\n\u001b[1;32m    234\u001b[0m     dtype \u001b[39m=\u001b[39m dtype\u001b[39m.\u001b[39mnumpy_dtype\n\u001b[1;32m    236\u001b[0m \u001b[39mtry\u001b[39;00m:\n\u001b[0;32m--> 237\u001b[0m     new_values \u001b[39m=\u001b[39m astype_array(values, dtype, copy\u001b[39m=\u001b[39;49mcopy)\n\u001b[1;32m    238\u001b[0m \u001b[39mexcept\u001b[39;00m (\u001b[39mValueError\u001b[39;00m, \u001b[39mTypeError\u001b[39;00m):\n\u001b[1;32m    239\u001b[0m     \u001b[39m# e.g. _astype_nansafe can fail on object-dtype of strings\u001b[39;00m\n\u001b[1;32m    240\u001b[0m     \u001b[39m#  trying to convert to float\u001b[39;00m\n\u001b[1;32m    241\u001b[0m     \u001b[39mif\u001b[39;00m errors \u001b[39m==\u001b[39m \u001b[39m\"\u001b[39m\u001b[39mignore\u001b[39m\u001b[39m\"\u001b[39m:\n",
+      "File \u001b[0;32m~/coding/sisyphus/PdWorkout/.venv/lib/python3.12/site-packages/pandas/core/dtypes/astype.py:182\u001b[0m, in \u001b[0;36mastype_array\u001b[0;34m(values, dtype, copy)\u001b[0m\n\u001b[1;32m    179\u001b[0m     values \u001b[39m=\u001b[39m values\u001b[39m.\u001b[39mastype(dtype, copy\u001b[39m=\u001b[39mcopy)\n\u001b[1;32m    181\u001b[0m \u001b[39melse\u001b[39;00m:\n\u001b[0;32m--> 182\u001b[0m     values \u001b[39m=\u001b[39m _astype_nansafe(values, dtype, copy\u001b[39m=\u001b[39;49mcopy)\n\u001b[1;32m    184\u001b[0m \u001b[39m# in pandas we don't store numpy str dtypes, so convert to object\u001b[39;00m\n\u001b[1;32m    185\u001b[0m \u001b[39mif\u001b[39;00m \u001b[39misinstance\u001b[39m(dtype, np\u001b[39m.\u001b[39mdtype) \u001b[39mand\u001b[39;00m \u001b[39missubclass\u001b[39m(values\u001b[39m.\u001b[39mdtype\u001b[39m.\u001b[39mtype, \u001b[39mstr\u001b[39m):\n",
+      "File \u001b[0;32m~/coding/sisyphus/PdWorkout/.venv/lib/python3.12/site-packages/pandas/core/dtypes/astype.py:101\u001b[0m, in \u001b[0;36m_astype_nansafe\u001b[0;34m(arr, dtype, copy, skipna)\u001b[0m\n\u001b[1;32m     96\u001b[0m     \u001b[39mreturn\u001b[39;00m lib\u001b[39m.\u001b[39mensure_string_array(\n\u001b[1;32m     97\u001b[0m         arr, skipna\u001b[39m=\u001b[39mskipna, convert_na_value\u001b[39m=\u001b[39m\u001b[39mFalse\u001b[39;00m\n\u001b[1;32m     98\u001b[0m     )\u001b[39m.\u001b[39mreshape(shape)\n\u001b[1;32m    100\u001b[0m \u001b[39melif\u001b[39;00m np\u001b[39m.\u001b[39missubdtype(arr\u001b[39m.\u001b[39mdtype, np\u001b[39m.\u001b[39mfloating) \u001b[39mand\u001b[39;00m dtype\u001b[39m.\u001b[39mkind \u001b[39min\u001b[39;00m \u001b[39m\"\u001b[39m\u001b[39miu\u001b[39m\u001b[39m\"\u001b[39m:\n\u001b[0;32m--> 101\u001b[0m     \u001b[39mreturn\u001b[39;00m _astype_float_to_int_nansafe(arr, dtype, copy)\n\u001b[1;32m    103\u001b[0m \u001b[39melif\u001b[39;00m arr\u001b[39m.\u001b[39mdtype \u001b[39m==\u001b[39m \u001b[39mobject\u001b[39m:\n\u001b[1;32m    104\u001b[0m     \u001b[39m# if we have a datetime/timedelta array of objects\u001b[39;00m\n\u001b[1;32m    105\u001b[0m     \u001b[39m# then coerce to datetime64[ns] and use DatetimeArray.astype\u001b[39;00m\n\u001b[1;32m    107\u001b[0m     \u001b[39mif\u001b[39;00m lib\u001b[39m.\u001b[39mis_np_dtype(dtype, \u001b[39m\"\u001b[39m\u001b[39mM\u001b[39m\u001b[39m\"\u001b[39m):\n",
+      "File \u001b[0;32m~/coding/sisyphus/PdWorkout/.venv/lib/python3.12/site-packages/pandas/core/dtypes/astype.py:145\u001b[0m, in \u001b[0;36m_astype_float_to_int_nansafe\u001b[0;34m(values, dtype, copy)\u001b[0m\n\u001b[1;32m    141\u001b[0m \u001b[39m\u001b[39m\u001b[39m\"\"\"\u001b[39;00m\n\u001b[1;32m    142\u001b[0m \u001b[39mastype with a check preventing converting NaN to an meaningless integer value.\u001b[39;00m\n\u001b[1;32m    143\u001b[0m \u001b[39m\"\"\"\u001b[39;00m\n\u001b[1;32m    144\u001b[0m \u001b[39mif\u001b[39;00m \u001b[39mnot\u001b[39;00m np\u001b[39m.\u001b[39misfinite(values)\u001b[39m.\u001b[39mall():\n\u001b[0;32m--> 145\u001b[0m     \u001b[39mraise\u001b[39;00m IntCastingNaNError(\n\u001b[1;32m    146\u001b[0m         \u001b[39m\"\u001b[39m\u001b[39mCannot convert non-finite values (NA or inf) to integer\u001b[39m\u001b[39m\"\u001b[39m\n\u001b[1;32m    147\u001b[0m     )\n\u001b[1;32m    148\u001b[0m \u001b[39mif\u001b[39;00m dtype\u001b[39m.\u001b[39mkind \u001b[39m==\u001b[39m \u001b[39m\"\u001b[39m\u001b[39mu\u001b[39m\u001b[39m\"\u001b[39m:\n\u001b[1;32m    149\u001b[0m     \u001b[39m# GH#45151\u001b[39;00m\n\u001b[1;32m    150\u001b[0m     \u001b[39mif\u001b[39;00m \u001b[39mnot\u001b[39;00m (values \u001b[39m>\u001b[39m\u001b[39m=\u001b[39m \u001b[39m0\u001b[39m)\u001b[39m.\u001b[39mall():\n",
+      "\u001b[0;31mIntCastingNaNError\u001b[0m: Cannot convert non-finite values (NA or inf) to integer"
+     ]
+    }
+   ],
+   "source": [
+    "import numpy as np\n",
+    "import pandas as pd\n",
+    "\n",
+    "parse_dates = ['Bill Date']\n",
+    "df = pd.read_csv('~/Downloads/Bill_Purchases_All.csv', parse_dates=parse_dates)\n",
+    "df['fiscal_year'] = np.where(df['Bill Date'].dt.month >= 4, df['Bill Date'].dt.year,  df['Bill Date'].dt.year-1)\n",
+    "df['account_clean'] = np.where(df['Tax Percentage'] > 0 & df['Tax Percentage'].notnull(), 'GST Purchase @ '+ df[\"Tax Percentage\"].astype(int).astype(str) +'%', df['Account'])\n",
+    "df['item_account_type_clean'] = np.where(df['Tax Name'].str.startswith(\"GST\") & df['Item Account Type'].isnull(),\n",
+    "                                         'Expense', df['Item Account Type'])\n",
+    "\n",
+    "# for yr in range(2017,2023):\n",
+    "#     df_yr = df[df.fiscal_year == yr]\n",
+    "#     fiscal_year_prefix = ((yr % 100) * 100) + ((yr % 100) + 1)\n",
+    "#     df_yr.to_csv(f'~/Downloads/Bill_Purchases_{yr}.csv', index=False)\n",
+    "\n",
+    "# for each of the above df_yr dataframe, create a file for each quarter in that fiscal year \n",
+    "# in seperate folders\n",
+    "for yr in range(2017, 2023):\n",
+    "    df_yr = df[df.fiscal_year == yr]\n",
+    "    fiscal_year_prefix = ((yr % 100) * 100) + ((yr % 100) + 1)\n",
+    "    for qtr in range(1, 5):\n",
+    "        df_qtr = df_yr[df_yr['Bill Date'].dt.to_period('Q-MAR').dt.quarter == qtr]\n",
+    "        df_qtr.to_csv(f'~/Downloads/Bill_Purchases_{fiscal_year_prefix}_Q{qtr}.csv', index=False)"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": null,
+   "id": "2529c9d8-0aa3-4531-acf6-f5d703945e80",
+   "metadata": {},
+   "outputs": [
+    {
+     "name": "stderr",
+     "output_type": "stream",
+     "text": [
+      "<ipython-input-16-1dbac8eecd8d>:5: DtypeWarning: Columns (48,50) have mixed types. Specify dtype option on import or set low_memory=False.\n",
+      "  df = pd.read_csv('~/Downloads/Bill_Purchases_All.csv', parse_dates=parse_dates)\n"
+     ]
+    },
+    {
+     "ename": "AttributeError",
+     "evalue": "'Series' object has no attribute 'rstrip'",
+     "output_type": "error",
+     "traceback": [
+      "\u001b[0;31m---------------------------------------------------------------------------\u001b[0m",
+      "\u001b[0;31mAttributeError\u001b[0m                            Traceback (most recent call last)",
+      "\u001b[0;32m<ipython-input-16-1dbac8eecd8d>\u001b[0m in \u001b[0;36m?\u001b[0;34m()\u001b[0m\n\u001b[1;32m      3\u001b[0m \u001b[0;34m\u001b[0m\u001b[0m\n\u001b[1;32m      4\u001b[0m \u001b[0mparse_dates\u001b[0m \u001b[0;34m=\u001b[0m \u001b[0;34m[\u001b[0m\u001b[0;34m'Bill Date'\u001b[0m\u001b[0;34m]\u001b[0m\u001b[0;34m\u001b[0m\u001b[0;34m\u001b[0m\u001b[0m\n\u001b[1;32m      5\u001b[0m \u001b[0mdf\u001b[0m \u001b[0;34m=\u001b[0m \u001b[0mpd\u001b[0m\u001b[0;34m.\u001b[0m\u001b[0mread_csv\u001b[0m\u001b[0;34m(\u001b[0m\u001b[0;34m'~/Downloads/Bill_Purchases_All.csv'\u001b[0m\u001b[0;34m,\u001b[0m \u001b[0mparse_dates\u001b[0m\u001b[0;34m=\u001b[0m\u001b[0mparse_dates\u001b[0m\u001b[0;34m)\u001b[0m\u001b[0;34m\u001b[0m\u001b[0;34m\u001b[0m\u001b[0m\n\u001b[1;32m      6\u001b[0m \u001b[0mdf\u001b[0m\u001b[0;34m[\u001b[0m\u001b[0;34m'fiscal_year'\u001b[0m\u001b[0;34m]\u001b[0m \u001b[0;34m=\u001b[0m \u001b[0mnp\u001b[0m\u001b[0;34m.\u001b[0m\u001b[0mwhere\u001b[0m\u001b[0;34m(\u001b[0m\u001b[0mdf\u001b[0m\u001b[0;34m[\u001b[0m\u001b[0;34m'Bill Date'\u001b[0m\u001b[0;34m]\u001b[0m\u001b[0;34m.\u001b[0m\u001b[0mdt\u001b[0m\u001b[0;34m.\u001b[0m\u001b[0mmonth\u001b[0m \u001b[0;34m>=\u001b[0m \u001b[0;36m4\u001b[0m\u001b[0;34m,\u001b[0m \u001b[0mdf\u001b[0m\u001b[0;34m[\u001b[0m\u001b[0;34m'Bill Date'\u001b[0m\u001b[0;34m]\u001b[0m\u001b[0;34m.\u001b[0m\u001b[0mdt\u001b[0m\u001b[0;34m.\u001b[0m\u001b[0myear\u001b[0m\u001b[0;34m,\u001b[0m  \u001b[0mdf\u001b[0m\u001b[0;34m[\u001b[0m\u001b[0;34m'Bill Date'\u001b[0m\u001b[0;34m]\u001b[0m\u001b[0;34m.\u001b[0m\u001b[0mdt\u001b[0m\u001b[0;34m.\u001b[0m\u001b[0myear\u001b[0m\u001b[0;34m-\u001b[0m\u001b[0;36m1\u001b[0m\u001b[0;34m)\u001b[0m\u001b[0;34m\u001b[0m\u001b[0;34m\u001b[0m\u001b[0m\n\u001b[0;32m----> 7\u001b[0;31m \u001b[0mdf\u001b[0m\u001b[0;34m[\u001b[0m\u001b[0;34m'account_clean'\u001b[0m\u001b[0;34m]\u001b[0m \u001b[0;34m=\u001b[0m \u001b[0mnp\u001b[0m\u001b[0;34m.\u001b[0m\u001b[0mwhere\u001b[0m\u001b[0;34m(\u001b[0m\u001b[0mdf\u001b[0m\u001b[0;34m[\u001b[0m\u001b[0;34m'Tax Percentage'\u001b[0m\u001b[0;34m]\u001b[0m \u001b[0;34m>\u001b[0m \u001b[0;36m0\u001b[0m\u001b[0;34m,\u001b[0m \u001b[0;34m'GST Purchase @ '\u001b[0m\u001b[0;34m+\u001b[0m \u001b[0mdf\u001b[0m\u001b[0;34m[\u001b[0m\u001b[0;34m\"Tax Percentage\"\u001b[0m\u001b[0;34m]\u001b[0m\u001b[0;34m.\u001b[0m\u001b[0mastype\u001b[0m\u001b[0;34m(\u001b[0m\u001b[0mstr\u001b[0m\u001b[0;34m)\u001b[0m\u001b[0;34m.\u001b[0m\u001b[0mrstrip\u001b[0m\u001b[0;34m(\u001b[0m\u001b[0;34m'.0'\u001b[0m\u001b[0;34m)\u001b[0m \u001b[0;34m+\u001b[0m\u001b[0;34m'%'\u001b[0m\u001b[0;34m,\u001b[0m \u001b[0mdf\u001b[0m\u001b[0;34m[\u001b[0m\u001b[0;34m'Account'\u001b[0m\u001b[0;34m]\u001b[0m\u001b[0;34m)\u001b[0m\u001b[0;34m\u001b[0m\u001b[0;34m\u001b[0m\u001b[0m\n\u001b[0m\u001b[1;32m      8\u001b[0m df['item_account_type_clean'] = np.where(df['Tax Name'].str.startswith(\"GST\") & df['Item Account Type'].isnull(),\n\u001b[1;32m      9\u001b[0m                                          \u001b[0;34m'Expense'\u001b[0m\u001b[0;34m,\u001b[0m \u001b[0mdf\u001b[0m\u001b[0;34m[\u001b[0m\u001b[0;34m'Item Account Type'\u001b[0m\u001b[0;34m]\u001b[0m\u001b[0;34m)\u001b[0m\u001b[0;34m\u001b[0m\u001b[0;34m\u001b[0m\u001b[0m\n\u001b[1;32m     10\u001b[0m \u001b[0;34m\u001b[0m\u001b[0m\n",
+      "\u001b[0;32m~/coding/sisyphus/PdWorkout/.venv/lib/python3.12/site-packages/pandas/core/generic.py\u001b[0m in \u001b[0;36m?\u001b[0;34m(self, name)\u001b[0m\n\u001b[1;32m   6295\u001b[0m             \u001b[0;32mand\u001b[0m \u001b[0mname\u001b[0m \u001b[0;32mnot\u001b[0m \u001b[0;32min\u001b[0m \u001b[0mself\u001b[0m\u001b[0;34m.\u001b[0m\u001b[0m_accessors\u001b[0m\u001b[0;34m\u001b[0m\u001b[0;34m\u001b[0m\u001b[0m\n\u001b[1;32m   6296\u001b[0m             \u001b[0;32mand\u001b[0m \u001b[0mself\u001b[0m\u001b[0;34m.\u001b[0m\u001b[0m_info_axis\u001b[0m\u001b[0;34m.\u001b[0m\u001b[0m_can_hold_identifiers_and_holds_name\u001b[0m\u001b[0;34m(\u001b[0m\u001b[0mname\u001b[0m\u001b[0;34m)\u001b[0m\u001b[0;34m\u001b[0m\u001b[0;34m\u001b[0m\u001b[0m\n\u001b[1;32m   6297\u001b[0m         \u001b[0;34m)\u001b[0m\u001b[0;34m:\u001b[0m\u001b[0;34m\u001b[0m\u001b[0;34m\u001b[0m\u001b[0m\n\u001b[1;32m   6298\u001b[0m             \u001b[0;32mreturn\u001b[0m \u001b[0mself\u001b[0m\u001b[0;34m[\u001b[0m\u001b[0mname\u001b[0m\u001b[0;34m]\u001b[0m\u001b[0;34m\u001b[0m\u001b[0;34m\u001b[0m\u001b[0m\n\u001b[0;32m-> 6299\u001b[0;31m         \u001b[0;32mreturn\u001b[0m \u001b[0mobject\u001b[0m\u001b[0;34m.\u001b[0m\u001b[0m__getattribute__\u001b[0m\u001b[0;34m(\u001b[0m\u001b[0mself\u001b[0m\u001b[0;34m,\u001b[0m \u001b[0mname\u001b[0m\u001b[0;34m)\u001b[0m\u001b[0;34m\u001b[0m\u001b[0;34m\u001b[0m\u001b[0m\n\u001b[0m",
+      "\u001b[0;31mAttributeError\u001b[0m: 'Series' object has no attribute 'rstrip'"
+     ]
+    }
+   ],
+   "source": [
+    "import numpy as np\n",
+    "import pandas as pd\n",
+    "\n",
+    "parse_dates = ['Bill Date']\n",
+    "df = pd.read_csv('~/Downloads/Bill_Purchases_All.csv', parse_dates=parse_dates)\n",
+    "df['fiscal_year'] = np.where(df['Bill Date'].dt.month >= 4, df['Bill Date'].dt.year,  df['Bill Date'].dt.year-1)\n",
+    "df['account_clean'] = np.where(df['Tax Percentage'] > 0, 'GST Purchase @ '+ df[\"Tax Percentage\"].astype(str).rstrip('.0') +'%', df['Account'])\n",
+    "df['item_account_type_clean'] = np.where(df['Tax Name'].str.startswith(\"GST\") & df['Item Account Type'].isnull(),\n",
+    "                                         'Expense', df['Item Account Type'])\n",
+    "\n",
+    "# for yr in range(2017,2023):\n",
+    "#     df_yr = df[df.fiscal_year == yr]\n",
+    "#     fiscal_year_prefix = ((yr % 100) * 100) + ((yr % 100) + 1)\n",
+    "#     df_yr.to_csv(f'~/Downloads/Bill_Purchases_{yr}.csv', index=False)\n",
+    "\n",
+    "# for each of the above df_yr dataframe, create a file for each quarter in that fiscal year \n",
+    "# in seperate folders\n",
+    "for yr in range(2017, 2023):\n",
+    "    df_yr = df[df.fiscal_year == yr]\n",
+    "    fiscal_year_prefix = ((yr % 100) * 100) + ((yr % 100) + 1)\n",
+    "    for qtr in range(1, 5):\n",
+    "        df_qtr = df_yr[df_yr['Bill Date'].dt.to_period('Q-MAR').dt.quarter == qtr]\n",
+    "        df_qtr.to_csv(f'~/Downloads/Bill_Purchases_{fiscal_year_prefix}_Q{qtr}.csv', index=False)"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": null,
+   "id": "7d2fe14d-487d-4b3b-b297-1754c1f64e09",
+   "metadata": {},
+   "outputs": [
+    {
+     "name": "stderr",
+     "output_type": "stream",
+     "text": [
+      "<ipython-input-17-127f0ca03444>:5: DtypeWarning: Columns (48,50) have mixed types. Specify dtype option on import or set low_memory=False.\n",
+      "  df = pd.read_csv('~/Downloads/Bill_Purchases_All.csv', parse_dates=parse_dates)\n"
+     ]
+    },
+    {
+     "ename": "AttributeError",
+     "evalue": "Can only use .str accessor with string values!",
+     "output_type": "error",
+     "traceback": [
+      "\u001b[0;31m---------------------------------------------------------------------------\u001b[0m",
+      "\u001b[0;31mAttributeError\u001b[0m                            Traceback (most recent call last)",
+      "File \u001b[1;32mUntitled-1:7\u001b[0m\n\u001b[1;32m      5\u001b[0m df \u001b[39m=\u001b[39m pd\u001b[39m.\u001b[39mread_csv(\u001b[39m'\u001b[39m\u001b[39m~/Downloads/Bill_Purchases_All.csv\u001b[39m\u001b[39m'\u001b[39m, parse_dates\u001b[39m=\u001b[39mparse_dates)\n\u001b[1;32m      6\u001b[0m df[\u001b[39m'\u001b[39m\u001b[39mfiscal_year\u001b[39m\u001b[39m'\u001b[39m] \u001b[39m=\u001b[39m np\u001b[39m.\u001b[39mwhere(df[\u001b[39m'\u001b[39m\u001b[39mBill Date\u001b[39m\u001b[39m'\u001b[39m]\u001b[39m.\u001b[39mdt\u001b[39m.\u001b[39mmonth \u001b[39m>\u001b[39m\u001b[39m=\u001b[39m \u001b[39m4\u001b[39m, df[\u001b[39m'\u001b[39m\u001b[39mBill Date\u001b[39m\u001b[39m'\u001b[39m]\u001b[39m.\u001b[39mdt\u001b[39m.\u001b[39myear,  df[\u001b[39m'\u001b[39m\u001b[39mBill Date\u001b[39m\u001b[39m'\u001b[39m]\u001b[39m.\u001b[39mdt\u001b[39m.\u001b[39myear\u001b[39m-\u001b[39m\u001b[39m1\u001b[39m)\n\u001b[0;32m----> 7\u001b[0m df[\u001b[39m'\u001b[39m\u001b[39maccount_clean\u001b[39m\u001b[39m'\u001b[39m] \u001b[39m=\u001b[39m np\u001b[39m.\u001b[39mwhere(df[\u001b[39m'\u001b[39m\u001b[39mTax Percentage\u001b[39m\u001b[39m'\u001b[39m] \u001b[39m>\u001b[39m \u001b[39m0\u001b[39m, \u001b[39m'\u001b[39m\u001b[39mGST Purchase @ \u001b[39m\u001b[39m'\u001b[39m\u001b[39m+\u001b[39m df[\u001b[39m\"\u001b[39;49m\u001b[39mTax Percentage\u001b[39;49m\u001b[39m\"\u001b[39;49m]\u001b[39m.\u001b[39;49mstr\u001b[39m.\u001b[39mrstrip(\u001b[39m'\u001b[39m\u001b[39m.0\u001b[39m\u001b[39m'\u001b[39m) \u001b[39m+\u001b[39m\u001b[39m'\u001b[39m\u001b[39m%\u001b[39m\u001b[39m'\u001b[39m, df[\u001b[39m'\u001b[39m\u001b[39mAccount\u001b[39m\u001b[39m'\u001b[39m])\n\u001b[1;32m      8\u001b[0m df[\u001b[39m'\u001b[39m\u001b[39mitem_account_type_clean\u001b[39m\u001b[39m'\u001b[39m] \u001b[39m=\u001b[39m np\u001b[39m.\u001b[39mwhere(df[\u001b[39m'\u001b[39m\u001b[39mTax Name\u001b[39m\u001b[39m'\u001b[39m]\u001b[39m.\u001b[39mstr\u001b[39m.\u001b[39mstartswith(\u001b[39m\"\u001b[39m\u001b[39mGST\u001b[39m\u001b[39m\"\u001b[39m) \u001b[39m&\u001b[39m df[\u001b[39m'\u001b[39m\u001b[39mItem Account Type\u001b[39m\u001b[39m'\u001b[39m]\u001b[39m.\u001b[39misnull(),\n\u001b[1;32m      9\u001b[0m                                          \u001b[39m'\u001b[39m\u001b[39mExpense\u001b[39m\u001b[39m'\u001b[39m, df[\u001b[39m'\u001b[39m\u001b[39mItem Account Type\u001b[39m\u001b[39m'\u001b[39m])\n\u001b[1;32m     11\u001b[0m \u001b[39m# for yr in range(2017,2023):\u001b[39;00m\n\u001b[1;32m     12\u001b[0m \u001b[39m#     df_yr = df[df.fiscal_year == yr]\u001b[39;00m\n\u001b[1;32m     13\u001b[0m \u001b[39m#     fiscal_year_prefix = ((yr % 100) * 100) + ((yr % 100) + 1)\u001b[39;00m\n\u001b[0;32m   (...)\u001b[0m\n\u001b[1;32m     16\u001b[0m \u001b[39m# for each of the above df_yr dataframe, create a file for each quarter in that fiscal year \u001b[39;00m\n\u001b[1;32m     17\u001b[0m \u001b[39m# in seperate folders\u001b[39;00m\n",
+      "File \u001b[0;32m~/coding/sisyphus/PdWorkout/.venv/lib/python3.12/site-packages/pandas/core/generic.py:6299\u001b[0m, in \u001b[0;36mNDFrame.__getattr__\u001b[0;34m(self, name)\u001b[0m\n\u001b[1;32m   6292\u001b[0m \u001b[39mif\u001b[39;00m (\n\u001b[1;32m   6293\u001b[0m     name \u001b[39mnot\u001b[39;00m \u001b[39min\u001b[39;00m \u001b[39mself\u001b[39m\u001b[39m.\u001b[39m_internal_names_set\n\u001b[1;32m   6294\u001b[0m     \u001b[39mand\u001b[39;00m name \u001b[39mnot\u001b[39;00m \u001b[39min\u001b[39;00m \u001b[39mself\u001b[39m\u001b[39m.\u001b[39m_metadata\n\u001b[1;32m   6295\u001b[0m     \u001b[39mand\u001b[39;00m name \u001b[39mnot\u001b[39;00m \u001b[39min\u001b[39;00m \u001b[39mself\u001b[39m\u001b[39m.\u001b[39m_accessors\n\u001b[1;32m   6296\u001b[0m     \u001b[39mand\u001b[39;00m \u001b[39mself\u001b[39m\u001b[39m.\u001b[39m_info_axis\u001b[39m.\u001b[39m_can_hold_identifiers_and_holds_name(name)\n\u001b[1;32m   6297\u001b[0m ):\n\u001b[1;32m   6298\u001b[0m     \u001b[39mreturn\u001b[39;00m \u001b[39mself\u001b[39m[name]\n\u001b[0;32m-> 6299\u001b[0m \u001b[39mreturn\u001b[39;00m \u001b[39mobject\u001b[39;49m\u001b[39m.\u001b[39;49m\u001b[39m__getattribute__\u001b[39;49m(\u001b[39mself\u001b[39;49m, name)\n",
+      "File \u001b[0;32m~/coding/sisyphus/PdWorkout/.venv/lib/python3.12/site-packages/pandas/core/accessor.py:224\u001b[0m, in \u001b[0;36mCachedAccessor.__get__\u001b[0;34m(self, obj, cls)\u001b[0m\n\u001b[1;32m    221\u001b[0m \u001b[39mif\u001b[39;00m obj \u001b[39mis\u001b[39;00m \u001b[39mNone\u001b[39;00m:\n\u001b[1;32m    222\u001b[0m     \u001b[39m# we're accessing the attribute of the class, i.e., Dataset.geo\u001b[39;00m\n\u001b[1;32m    223\u001b[0m     \u001b[39mreturn\u001b[39;00m \u001b[39mself\u001b[39m\u001b[39m.\u001b[39m_accessor\n\u001b[0;32m--> 224\u001b[0m accessor_obj \u001b[39m=\u001b[39m \u001b[39mself\u001b[39;49m\u001b[39m.\u001b[39;49m_accessor(obj)\n\u001b[1;32m    225\u001b[0m \u001b[39m# Replace the property with the accessor object. Inspired by:\u001b[39;00m\n\u001b[1;32m    226\u001b[0m \u001b[39m# https://www.pydanny.com/cached-property.html\u001b[39;00m\n\u001b[1;32m    227\u001b[0m \u001b[39m# We need to use object.__setattr__ because we overwrite __setattr__ on\u001b[39;00m\n\u001b[1;32m    228\u001b[0m \u001b[39m# NDFrame\u001b[39;00m\n\u001b[1;32m    229\u001b[0m \u001b[39mobject\u001b[39m\u001b[39m.\u001b[39m\u001b[39m__setattr__\u001b[39m(obj, \u001b[39mself\u001b[39m\u001b[39m.\u001b[39m_name, accessor_obj)\n",
+      "File \u001b[0;32m~/coding/sisyphus/PdWorkout/.venv/lib/python3.12/site-packages/pandas/core/strings/accessor.py:191\u001b[0m, in \u001b[0;36mStringMethods.__init__\u001b[0;34m(self, data)\u001b[0m\n\u001b[1;32m    188\u001b[0m \u001b[39mdef\u001b[39;00m \u001b[39m__init__\u001b[39m(\u001b[39mself\u001b[39m, data) \u001b[39m-\u001b[39m\u001b[39m>\u001b[39m \u001b[39mNone\u001b[39;00m:\n\u001b[1;32m    189\u001b[0m     \u001b[39mfrom\u001b[39;00m \u001b[39mpandas\u001b[39;00m\u001b[39m.\u001b[39;00m\u001b[39mcore\u001b[39;00m\u001b[39m.\u001b[39;00m\u001b[39marrays\u001b[39;00m\u001b[39m.\u001b[39;00m\u001b[39mstring_\u001b[39;00m \u001b[39mimport\u001b[39;00m StringDtype\n\u001b[0;32m--> 191\u001b[0m     \u001b[39mself\u001b[39m\u001b[39m.\u001b[39m_inferred_dtype \u001b[39m=\u001b[39m \u001b[39mself\u001b[39;49m\u001b[39m.\u001b[39;49m_validate(data)\n\u001b[1;32m    192\u001b[0m     \u001b[39mself\u001b[39m\u001b[39m.\u001b[39m_is_categorical \u001b[39m=\u001b[39m \u001b[39misinstance\u001b[39m(data\u001b[39m.\u001b[39mdtype, CategoricalDtype)\n\u001b[1;32m    193\u001b[0m     \u001b[39mself\u001b[39m\u001b[39m.\u001b[39m_is_string \u001b[39m=\u001b[39m \u001b[39misinstance\u001b[39m(data\u001b[39m.\u001b[39mdtype, StringDtype)\n",
+      "File \u001b[0;32m~/coding/sisyphus/PdWorkout/.venv/lib/python3.12/site-packages/pandas/core/strings/accessor.py:245\u001b[0m, in \u001b[0;36mStringMethods._validate\u001b[0;34m(data)\u001b[0m\n\u001b[1;32m    242\u001b[0m inferred_dtype \u001b[39m=\u001b[39m lib\u001b[39m.\u001b[39minfer_dtype(values, skipna\u001b[39m=\u001b[39m\u001b[39mTrue\u001b[39;00m)\n\u001b[1;32m    244\u001b[0m \u001b[39mif\u001b[39;00m inferred_dtype \u001b[39mnot\u001b[39;00m \u001b[39min\u001b[39;00m allowed_types:\n\u001b[0;32m--> 245\u001b[0m     \u001b[39mraise\u001b[39;00m \u001b[39mAttributeError\u001b[39;00m(\u001b[39m\"\u001b[39m\u001b[39mCan only use .str accessor with string values!\u001b[39m\u001b[39m\"\u001b[39m)\n\u001b[1;32m    246\u001b[0m \u001b[39mreturn\u001b[39;00m inferred_dtype\n",
+      "\u001b[0;31mAttributeError\u001b[0m: Can only use .str accessor with string values!"
+     ]
+    }
+   ],
+   "source": [
+    "import numpy as np\n",
+    "import pandas as pd\n",
+    "\n",
+    "parse_dates = ['Bill Date']\n",
+    "df = pd.read_csv('~/Downloads/Bill_Purchases_All.csv', parse_dates=parse_dates)\n",
+    "df['fiscal_year'] = np.where(df['Bill Date'].dt.month >= 4, df['Bill Date'].dt.year,  df['Bill Date'].dt.year-1)\n",
+    "df['account_clean'] = np.where(df['Tax Percentage'] > 0, 'GST Purchase @ '+ df[\"Tax Percentage\"].str.rstrip('.0') +'%', df['Account'])\n",
+    "df['item_account_type_clean'] = np.where(df['Tax Name'].str.startswith(\"GST\") & df['Item Account Type'].isnull(),\n",
+    "                                         'Expense', df['Item Account Type'])\n",
+    "\n",
+    "# for yr in range(2017,2023):\n",
+    "#     df_yr = df[df.fiscal_year == yr]\n",
+    "#     fiscal_year_prefix = ((yr % 100) * 100) + ((yr % 100) + 1)\n",
+    "#     df_yr.to_csv(f'~/Downloads/Bill_Purchases_{yr}.csv', index=False)\n",
+    "\n",
+    "# for each of the above df_yr dataframe, create a file for each quarter in that fiscal year \n",
+    "# in seperate folders\n",
+    "for yr in range(2017, 2023):\n",
+    "    df_yr = df[df.fiscal_year == yr]\n",
+    "    fiscal_year_prefix = ((yr % 100) * 100) + ((yr % 100) + 1)\n",
+    "    for qtr in range(1, 5):\n",
+    "        df_qtr = df_yr[df_yr['Bill Date'].dt.to_period('Q-MAR').dt.quarter == qtr]\n",
+    "        df_qtr.to_csv(f'~/Downloads/Bill_Purchases_{fiscal_year_prefix}_Q{qtr}.csv', index=False)"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": null,
+   "id": "d2670342-19bc-473e-9434-3fc6529acb57",
+   "metadata": {},
+   "outputs": [
+    {
+     "name": "stderr",
+     "output_type": "stream",
+     "text": [
+      "<ipython-input-18-b9e2d0c1bdf3>:5: DtypeWarning: Columns (48,50) have mixed types. Specify dtype option on import or set low_memory=False.\n",
+      "  df = pd.read_csv('~/Downloads/Bill_Purchases_All.csv', parse_dates=parse_dates)\n"
+     ]
+    },
+    {
+     "ename": "NameError",
+     "evalue": "name 'string' is not defined",
+     "output_type": "error",
+     "traceback": [
+      "\u001b[0;31m---------------------------------------------------------------------------\u001b[0m",
+      "\u001b[0;31mNameError\u001b[0m                                 Traceback (most recent call last)",
+      "File \u001b[1;32mUntitled-1:7\u001b[0m\n\u001b[1;32m      5\u001b[0m df \u001b[39m=\u001b[39m pd\u001b[39m.\u001b[39mread_csv(\u001b[39m'\u001b[39m\u001b[39m~/Downloads/Bill_Purchases_All.csv\u001b[39m\u001b[39m'\u001b[39m, parse_dates\u001b[39m=\u001b[39mparse_dates)\n\u001b[1;32m      6\u001b[0m df[\u001b[39m'\u001b[39m\u001b[39mfiscal_year\u001b[39m\u001b[39m'\u001b[39m] \u001b[39m=\u001b[39m np\u001b[39m.\u001b[39mwhere(df[\u001b[39m'\u001b[39m\u001b[39mBill Date\u001b[39m\u001b[39m'\u001b[39m]\u001b[39m.\u001b[39mdt\u001b[39m.\u001b[39mmonth \u001b[39m>\u001b[39m\u001b[39m=\u001b[39m \u001b[39m4\u001b[39m, df[\u001b[39m'\u001b[39m\u001b[39mBill Date\u001b[39m\u001b[39m'\u001b[39m]\u001b[39m.\u001b[39mdt\u001b[39m.\u001b[39myear,  df[\u001b[39m'\u001b[39m\u001b[39mBill Date\u001b[39m\u001b[39m'\u001b[39m]\u001b[39m.\u001b[39mdt\u001b[39m.\u001b[39myear\u001b[39m-\u001b[39m\u001b[39m1\u001b[39m)\n\u001b[0;32m----> 7\u001b[0m df[\u001b[39m'\u001b[39m\u001b[39maccount_clean\u001b[39m\u001b[39m'\u001b[39m] \u001b[39m=\u001b[39m np\u001b[39m.\u001b[39mwhere(df[\u001b[39m'\u001b[39m\u001b[39mTax Percentage\u001b[39m\u001b[39m'\u001b[39m] \u001b[39m>\u001b[39m \u001b[39m0\u001b[39m, \u001b[39m'\u001b[39m\u001b[39mGST Purchase @ \u001b[39m\u001b[39m'\u001b[39m\u001b[39m+\u001b[39m df[\u001b[39m\"\u001b[39m\u001b[39mTax Percentage\u001b[39m\u001b[39m\"\u001b[39m]\u001b[39m.\u001b[39mastype(string)\u001b[39m.\u001b[39mstr\u001b[39m.\u001b[39mrstrip(\u001b[39m'\u001b[39m\u001b[39m.0\u001b[39m\u001b[39m'\u001b[39m) \u001b[39m+\u001b[39m\u001b[39m'\u001b[39m\u001b[39m%\u001b[39m\u001b[39m'\u001b[39m, df[\u001b[39m'\u001b[39m\u001b[39mAccount\u001b[39m\u001b[39m'\u001b[39m])\n\u001b[1;32m      8\u001b[0m df[\u001b[39m'\u001b[39m\u001b[39mitem_account_type_clean\u001b[39m\u001b[39m'\u001b[39m] \u001b[39m=\u001b[39m np\u001b[39m.\u001b[39mwhere(df[\u001b[39m'\u001b[39m\u001b[39mTax Name\u001b[39m\u001b[39m'\u001b[39m]\u001b[39m.\u001b[39mstr\u001b[39m.\u001b[39mstartswith(\u001b[39m\"\u001b[39m\u001b[39mGST\u001b[39m\u001b[39m\"\u001b[39m) \u001b[39m&\u001b[39m df[\u001b[39m'\u001b[39m\u001b[39mItem Account Type\u001b[39m\u001b[39m'\u001b[39m]\u001b[39m.\u001b[39misnull(),\n\u001b[1;32m      9\u001b[0m                                          \u001b[39m'\u001b[39m\u001b[39mExpense\u001b[39m\u001b[39m'\u001b[39m, df[\u001b[39m'\u001b[39m\u001b[39mItem Account Type\u001b[39m\u001b[39m'\u001b[39m])\n\u001b[1;32m     11\u001b[0m \u001b[39m# for yr in range(2017,2023):\u001b[39;00m\n\u001b[1;32m     12\u001b[0m \u001b[39m#     df_yr = df[df.fiscal_year == yr]\u001b[39;00m\n\u001b[1;32m     13\u001b[0m \u001b[39m#     fiscal_year_prefix = ((yr % 100) * 100) + ((yr % 100) + 1)\u001b[39;00m\n\u001b[0;32m   (...)\u001b[0m\n\u001b[1;32m     16\u001b[0m \u001b[39m# for each of the above df_yr dataframe, create a file for each quarter in that fiscal year \u001b[39;00m\n\u001b[1;32m     17\u001b[0m \u001b[39m# in seperate folders\u001b[39;00m\n",
+      "\u001b[0;31mNameError\u001b[0m: name 'string' is not defined"
+     ]
+    }
+   ],
+   "source": [
+    "import numpy as np\n",
+    "import pandas as pd\n",
+    "\n",
+    "parse_dates = ['Bill Date']\n",
+    "df = pd.read_csv('~/Downloads/Bill_Purchases_All.csv', parse_dates=parse_dates)\n",
+    "df['fiscal_year'] = np.where(df['Bill Date'].dt.month >= 4, df['Bill Date'].dt.year,  df['Bill Date'].dt.year-1)\n",
+    "df['account_clean'] = np.where(df['Tax Percentage'] > 0, 'GST Purchase @ '+ df[\"Tax Percentage\"].astype(string).str.rstrip('.0') +'%', df['Account'])\n",
+    "df['item_account_type_clean'] = np.where(df['Tax Name'].str.startswith(\"GST\") & df['Item Account Type'].isnull(),\n",
+    "                                         'Expense', df['Item Account Type'])\n",
+    "\n",
+    "# for yr in range(2017,2023):\n",
+    "#     df_yr = df[df.fiscal_year == yr]\n",
+    "#     fiscal_year_prefix = ((yr % 100) * 100) + ((yr % 100) + 1)\n",
+    "#     df_yr.to_csv(f'~/Downloads/Bill_Purchases_{yr}.csv', index=False)\n",
+    "\n",
+    "# for each of the above df_yr dataframe, create a file for each quarter in that fiscal year \n",
+    "# in seperate folders\n",
+    "for yr in range(2017, 2023):\n",
+    "    df_yr = df[df.fiscal_year == yr]\n",
+    "    fiscal_year_prefix = ((yr % 100) * 100) + ((yr % 100) + 1)\n",
+    "    for qtr in range(1, 5):\n",
+    "        df_qtr = df_yr[df_yr['Bill Date'].dt.to_period('Q-MAR').dt.quarter == qtr]\n",
+    "        df_qtr.to_csv(f'~/Downloads/Bill_Purchases_{fiscal_year_prefix}_Q{qtr}.csv', index=False)"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": null,
+   "id": "ecb2a9ff-e5d4-408d-8bce-46ebf0c31d9a",
+   "metadata": {},
+   "outputs": [
+    {
+     "name": "stderr",
+     "output_type": "stream",
+     "text": [
+      "<ipython-input-19-f88dea0cd592>:5: DtypeWarning: Columns (48,50) have mixed types. Specify dtype option on import or set low_memory=False.\n",
+      "  df = pd.read_csv('~/Downloads/Bill_Purchases_All.csv', parse_dates=parse_dates)\n"
+     ]
+    }
+   ],
+   "source": [
+    "import numpy as np\n",
+    "import pandas as pd\n",
+    "\n",
+    "parse_dates = ['Bill Date']\n",
+    "df = pd.read_csv('~/Downloads/Bill_Purchases_All.csv', parse_dates=parse_dates)\n",
+    "df['fiscal_year'] = np.where(df['Bill Date'].dt.month >= 4, df['Bill Date'].dt.year,  df['Bill Date'].dt.year-1)\n",
+    "df['account_clean'] = np.where(df['Tax Percentage'] > 0, 'GST Purchase @ '+ df[\"Tax Percentage\"].astype(str).str.rstrip('.0') +'%', df['Account'])\n",
+    "df['item_account_type_clean'] = np.where(df['Tax Name'].str.startswith(\"GST\") & df['Item Account Type'].isnull(),\n",
+    "                                         'Expense', df['Item Account Type'])\n",
+    "\n",
+    "# for yr in range(2017,2023):\n",
+    "#     df_yr = df[df.fiscal_year == yr]\n",
+    "#     fiscal_year_prefix = ((yr % 100) * 100) + ((yr % 100) + 1)\n",
+    "#     df_yr.to_csv(f'~/Downloads/Bill_Purchases_{yr}.csv', index=False)\n",
+    "\n",
+    "# for each of the above df_yr dataframe, create a file for each quarter in that fiscal year \n",
+    "# in seperate folders\n",
+    "for yr in range(2017, 2023):\n",
+    "    df_yr = df[df.fiscal_year == yr]\n",
+    "    fiscal_year_prefix = ((yr % 100) * 100) + ((yr % 100) + 1)\n",
+    "    for qtr in range(1, 5):\n",
+    "        df_qtr = df_yr[df_yr['Bill Date'].dt.to_period('Q-MAR').dt.quarter == qtr]\n",
+    "        df_qtr.to_csv(f'~/Downloads/Bill_Purchases_{fiscal_year_prefix}_Q{qtr}.csv', index=False)"
+   ]
+  }
+ ],
+ "metadata": {
+  "kernelspec": {
+   "display_name": ".venv",
+   "language": "python",
+   "name": "python3"
+  },
+  "language_info": {
+   "codemirror_mode": {
+    "name": "ipython",
+    "version": 3
+   },
+   "file_extension": ".py",
+   "mimetype": "text/x-python",
+   "name": "python",
+   "nbconvert_exporter": "python",
+   "pygments_lexer": "ipython3",
+   "version": "3.12.6"
+  }
+ },
+ "nbformat": 4,
+ "nbformat_minor": 2
+}

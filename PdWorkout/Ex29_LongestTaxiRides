@@ -1,0 +1,62 @@
+import pandas as pd
+from pandas import DataFrame
+
+cols = ['passenger_count', 'trip_distance', 'total_amount']
+
+file_name = 'nyc_taxi_2019-01.csv'
+data_folder = 'data/'
+
+df = pd.read_csv(data_folder + file_name, usecols=cols)
+
+# sort dataframe by distance in descending order
+df_sorted_distance_desc = df.sort_values(by='trip_distance', ascending=False)
+df_sorted_distance_desc.iloc[:20].agg(['mean'])
+
+df.sort_values(by='trip_distance', ascending=False).loc[:20, 'total_amount'].mean()
+
+df_sorted_distance_asc = df.sort_values(by='trip_distance', ascending=True) 
+df_sorted_distance_asc.iloc[-20:].agg(['mean'])
+
+df.sort_values(by=['passenger_count', 'trip_distance'], ascending=[True, False])
+
+# Pandas workout chapter 29 Grouping section
+df2 = DataFrame([ 
+        {'product_id': 23,
+         'name': 'computer',
+         'wholesale_price':500,
+         'retail_price':1000,
+         'sales':100,
+         'department': 'electronics'},
+         {
+        'product_id':96,
+        'name':'Python Workout',
+        'wholesale_price':35,
+        'retail_price':75,
+        'sales':1000,
+        'department':'books'
+         },
+         {
+        'product_id':97,
+        'name':'Pandas Workout',
+        'wholesale_price':35,
+        'retail_price':75,
+        'sales':500,
+        'department':'books'
+         },
+         {
+        'product_id':15,
+        'name':'Banana',
+        'wholesale_price':0.5,
+        'retail_price':1,
+        'sales':200,
+        'department':'food'
+         },
+         {
+            'product_id':87,
+            'name':'sandwich',
+            'wholesale_price':3,
+            'retail_price':5,
+            'sales':300,
+            'department':''
+         }
+    ])
